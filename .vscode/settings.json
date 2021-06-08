@@ -6,13 +6,22 @@
   "prettier.enable": false,
   "tailwindCSS.validate": false,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "volar.style.defaultLanguage": "postcss",
   "volar.tsPlugin": true,
   "volar.tsPluginStatus": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "eslint.packageManager": "pnpm",
   "files.associations": {
     "*.css": "postcss"
+  },
+  "css.validate": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "windicss.enableCodeFolding": false,
+  "windicss.sortOnSave": true,
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   }
 }
