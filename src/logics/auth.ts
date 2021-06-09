@@ -78,6 +78,10 @@ export function useAuth() {
     }
   }
 
+  function resetPassword(email: string) {
+    alert(email)
+  }
+
   return {
     userId,
     login,
@@ -86,5 +90,6 @@ export function useAuth() {
     loginWithTwitter,
     logout,
     isAuthorized,
+    resetPassword,
   }
 }
