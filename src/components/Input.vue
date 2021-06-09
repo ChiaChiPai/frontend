@@ -48,7 +48,7 @@ function handleInput(event: Event) {
   <label class="block my-2">
     <span class="block text-sm mb-1">{{ label }}</span>
     <input
-      class="px-3 py-2 border w-full"
+      class="px-3 py-2 border w-full rounded-md"
       :type="type"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
