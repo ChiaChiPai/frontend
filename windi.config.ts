@@ -19,7 +19,7 @@ export default defineConfig({
         '@apply': 'outline-none',
       },
       '&-outline': {
-        '@apply': 'bg-white border border-primary text-primary',
+        '@apply': ' py-1.5 bg-white border border-primary text-primary',
       },
     },
     'icon-btn': {

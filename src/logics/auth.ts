@@ -1,4 +1,4 @@
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStorage, useFetch } from '@vueuse/core'
 import { API_ENDPOINT } from '@/constants'
@@ -21,6 +21,10 @@ export function useAuth() {
   const router = useRouter()
   const userId = useStorage<string | null>('userId', null)
 
+  const isAuthorized = computed(() => {
+    return userId.value !== 'null'
+  })
+
   function login(user: LoginArgs) {
     const { isFetching, error, data } = useFetch(`${API_ENDPOINT}/login`).json<LoginResponse>().post(user)
 
@@ -33,6 +37,7 @@ export function useAuth() {
 
     return {
       loading: isFetching,
+      error,
     }
   }
 
@@ -48,6 +53,7 @@ export function useAuth() {
 
     return {
       loading: isFetching,
+      error,
     }
   }
 
@@ -55,5 +61,6 @@ export function useAuth() {
     userId,
     login,
     logout,
+    isAuthorized,
   }
 }
