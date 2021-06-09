@@ -19,7 +19,16 @@ pnpm build
 pnpm server
 ```
 
+### VSCode
 
+停用以下 Extensions
+
+- Vetur - `octref.vetur`
+- Tailwind CSS IntelliSense - `bradlc.vscode-tailwindcss`
+
+使用推薦 Extensions
+
+`.vscode/extensions.json`
 
 ## Coding Style
 
