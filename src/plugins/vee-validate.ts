@@ -1,5 +1,5 @@
 import { defineRule, configure } from 'vee-validate'
-import { required, email, min } from '@vee-validate/rules'
+import { required, email, min, confirmed } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zh_TW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
@@ -7,6 +7,7 @@ import zh_TW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 defineRule('min', min)
 defineRule('email', email)
 defineRule('required', required)
+defineRule('confirmed', confirmed)
 
 // 新增語言（用於錯誤信息）
 configure({

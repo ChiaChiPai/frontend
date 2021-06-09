@@ -30,7 +30,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-
+  required: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const {
@@ -45,9 +48,10 @@ const {
 </script>
 
 <template>
-  <div class="relative w-full pb-6">
-    <label :for="name" class="block mb-1">
+  <div class="w-full pb-6 relative">
+    <label :for="name" class="mb-1 block">
       {{ label }}
+      <span v-if="required" class="text-red-400">*</span>
     </label>
     <input
       :id="name"
@@ -56,15 +60,12 @@ const {
       :value="inputValue"
       :autocomplete="autocomplete"
       :placeholder="placeholder"
-      class="
-        border border-tansparent rounded-md
-        px-3 py-2 outline-none w-full
-        focus:border-gray-400"
+      class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
       :class="{ 'border-red-400': !!errorMessage }"
       @input="handleChange"
       @blur="handleBlur"
     >
-    <p v-show="errorMessage" class="absolute left-0 bottom-0.5 m-0 text-xs text-red-400">
+    <p v-show="errorMessage" class="m-0 text-xs bottom-0.5 left-0 text-red-400 absolute">
       {{ errorMessage }}
     </p>
   </div>

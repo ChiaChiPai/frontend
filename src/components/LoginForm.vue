@@ -15,25 +15,25 @@ function onSubmit(values: LoginArgs) {
 
 <template>
   <Form v-slot="{ meta }" :validation-schema="schema" @submit="onSubmit">
-    <Input
+    <TheInput
       name="email"
       type="email"
       label="帳號"
       placeholder="user@example.com"
       autocomplete="email"
     />
-    <Input
+    <TheInput
       name="password"
       type="password"
       label="密碼"
       placeholder="password"
       autocomplete="current-password"
     />
-    <Checkbox
+    <TheCheckbox
       name="remember"
       label="記住我"
     />
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex mb-4 justify-between items-center">
       <router-link to="/account/password_reset" class="text-sm underline">
         忘記密碼
       </router-link>

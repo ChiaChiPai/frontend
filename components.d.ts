@@ -3,12 +3,15 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Checkbox: typeof import('./src/components/Checkbox.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
-    Input: typeof import('./src/components/Input.vue')['default']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     RegisterAccount: typeof import('./src/components/RegisterAccount.vue')['default']
     SSOLogin: typeof import('./src/components/SSOLogin.vue')['default']
+    TheCheckbox: typeof import('./src/components/TheCheckbox.vue')['default']
+    TheInput: typeof import('./src/components/TheInput.vue')['default']
+    TheRadio: typeof import('./src/components/TheRadio.vue')['default']
+    TheSelect: typeof import('./src/components/TheSelect.vue')['default']
+    AuthLayout: typeof import('./src/components/layout/AuthLayout.vue')['default']
   }
 }
 
