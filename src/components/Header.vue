@@ -11,7 +11,9 @@ defineProps({})
       <button class="icon-btn">
         <ic:round-menu />
       </button>
-      <span class="text-black font-bold">Shared TW</span>
+      <router-link to="/" class="block">
+        <img src="/img/logo.png" alt="Shared TW" class="h-55px">
+      </router-link>
       <button class="icon-btn">
         <ic:round-account-circle />
       </button>
