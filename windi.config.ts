@@ -18,8 +18,11 @@ export default defineConfig({
       '&:focus': {
         '@apply': 'outline-none',
       },
+      '&:disabled': {
+        '@apply': 'bg-gray-300',
+      },
       '&-outline': {
-        '@apply': ' py-1.5 bg-white border border-primary text-primary',
+        '@apply': 'py-1.5 bg-white border border-primary text-primary',
       },
     },
     'icon-btn': {

@@ -15,6 +15,7 @@ interface LogoutResponse {
 export interface LoginArgs {
   username: string
   password: string
+  remember: boolean
 }
 
 export function useAuth() {
@@ -41,6 +42,17 @@ export function useAuth() {
     }
   }
 
+  // handle SSO logins
+  function loginWithLine() {
+    alert('Login with Line')
+  }
+  function loginWithFacebook() {
+    alert('Login with Facebook')
+  }
+  function loginWithTwitter() {
+    alert('Login with Twitter')
+  }
+
   function logout() {
     const { isFetching, error, data } = useFetch(`${API_ENDPOINT}/logout`).json<LogoutResponse>().post()
 
@@ -60,6 +72,9 @@ export function useAuth() {
   return {
     userId,
     login,
+    loginWithLine,
+    loginWithFacebook,
+    loginWithTwitter,
     logout,
     isAuthorized,
   }

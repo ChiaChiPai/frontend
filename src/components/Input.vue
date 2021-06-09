@@ -1,20 +1,23 @@
 <script setup lang="ts">
-import { defineEmit, defineProps, ref, watch } from 'vue'
-
-const input = ref<HTMLInputElement | null>(null)
+import { defineProps } from 'vue'
+import { useField } from 'vee-validate'
 
 const props = defineProps({
-  modelValue: {
-    type: String,
-    default: '',
-  },
-  label: {
-    type: String,
-    default: '',
-  },
   type: {
     type: String,
     default: 'text',
+  },
+  value: {
+    type: String,
+    default: '',
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
   },
   autocomplete: {
     type: String,
@@ -27,32 +30,42 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
 })
 
-const emit = defineEmit(['input', 'update:modelValue'])
-
-watch(() => props.modelValue, (v) => {
-  if (!input.value || input.value.value === v) return
-  input.value.value = v
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+} = useField(props.name, undefined, {
+  initialValue: props.value,
 })
-
-function handleInput(event: Event) {
-  const { value } = event.target as HTMLInputElement
-  emit('input', value)
-  emit('update:modelValue', value)
-}
 
 </script>
 
 <template>
-  <label class="block my-2">
-    <span class="block text-sm mb-1">{{ label }}</span>
+  <div class="relative w-full pb-6">
+    <label :for="name" class="block mb-1">
+      {{ label }}
+    </label>
     <input
-      class="px-3 py-2 border w-full rounded-md"
+      :id="name"
+      :name="name"
       :type="type"
-      :placeholder="placeholder"
+      :value="inputValue"
       :autocomplete="autocomplete"
-      @input="handleInput"
+      :placeholder="placeholder"
+      class="
+        border border-tansparent rounded-md
+        px-3 py-2 outline-none w-full
+        focus:border-gray-400"
+      :class="{ 'border-red-400': !!errorMessage }"
+      @input="handleChange"
+      @blur="handleBlur"
     >
-  </label>
+    <p v-show="errorMessage" class="absolute left-0 bottom-0.5 m-0 text-xs text-red-400">
+      {{ errorMessage }}
+    </p>
+  </div>
 </template>
