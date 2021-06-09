@@ -14,7 +14,7 @@ export default defineConfig({
   },
   shortcuts: {
     'btn': {
-      '@apply': 'block px-3.5 py-2 bg-primary text-white rounded-md',
+      '@apply': 'inline-block px-3.5 py-2 bg-primary text-white rounded-md',
       '&:focus': {
         '@apply': 'outline-none',
       },
