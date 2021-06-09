@@ -33,7 +33,7 @@ function onSubmit(values: LoginArgs) {
       name="remember"
       label="記住我"
     />
-    <div class="flex mb-4 justify-between items-center">
+    <div class="flex mb-6 justify-between items-center">
       <router-link to="/account/password_reset" class="text-sm underline">
         忘記密碼
       </router-link>

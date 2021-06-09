@@ -10,7 +10,7 @@ const {
 </script>
 
 <template>
-  <div class="space-y-2 mb-2">
+  <div class="space-y-3 py-4 border-t">
     <button class="btn w-full bg-line" @click="loginWithLine">
       Line 登入
     </button>

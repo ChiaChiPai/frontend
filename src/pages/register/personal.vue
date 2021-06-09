@@ -111,7 +111,7 @@ function onSubmit(values: LoginArgs) {
         :children="needInvoiceItems"
         required
       />
-      <div class="flex mb-4 justify-between items-center">
+      <div class="flex justify-between items-center">
         <router-link to="/" class="text-sm underline">
           取消
         </router-link>
