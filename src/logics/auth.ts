@@ -20,10 +20,19 @@ export interface LoginArgs {
 
 export function useAuth() {
   const router = useRouter()
-  const userId = useStorage<string | null>('userId', null)
+  const userId = useStorage<string | null>('userId', null, undefined, {
+    serializer: {
+      read(raw) {
+        return raw === 'null' ? null : raw
+      },
+      write(raw) {
+        return String(raw)
+      },
+    },
+  })
 
   const isAuthorized = computed(() => {
-    return userId.value !== 'null'
+    return userId.value !== null
   })
 
   function login(user: LoginArgs) {
