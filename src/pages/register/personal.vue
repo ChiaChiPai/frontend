@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate'
 import type { LoginArgs } from '@/logics/auth'
+import type { InputChildren } from '@/type'
 
 const schema = {
   username: 'required',
@@ -8,6 +9,7 @@ const schema = {
   password: 'required|min:8',
   passwordConfirm: 'required|confirmed:@password',
   tel: 'required|numeric',
+  invoice: 'required',
 }
 
 const initialValues = {
@@ -15,7 +17,7 @@ const initialValues = {
   invoice: 'no',
 }
 
-const selectChild = [
+const otherContactItems: InputChildren[] = [
   {
     text: 'Line',
     value: 'line',
@@ -30,7 +32,7 @@ const selectChild = [
   },
 ]
 
-const radioChild = [
+const needInvoiceItems: InputChildren[] = [
   {
     text: '是',
     value: 'yes',
@@ -94,7 +96,7 @@ function onSubmit(values: LoginArgs) {
       <TheSelect
         name="otherContactType"
         label="其他聯絡方式"
-        :children="selectChild"
+        :children="otherContactItems"
       />
       <TheInput
         name="otherContact"
@@ -106,7 +108,7 @@ function onSubmit(values: LoginArgs) {
       <TheRadio
         name="invoice"
         label="是否需要收據"
-        :children="radioChild"
+        :children="needInvoiceItems"
         required
       />
       <div class="flex mb-4 justify-between items-center">

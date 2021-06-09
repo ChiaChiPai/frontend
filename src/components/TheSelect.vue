@@ -2,11 +2,7 @@
 import { defineProps } from 'vue'
 import { useField } from 'vee-validate'
 import type { PropType } from 'vue'
-
-interface SelectChildren {
-  text: string
-  value: string
-}
+import type { InputChildren } from '@/type'
 
 const props = defineProps({
   value: {
@@ -30,7 +26,7 @@ const props = defineProps({
     default: false,
   },
   children: {
-    type: Array as PropType<SelectChildren[]>,
+    type: Array as PropType<InputChildren[]>,
     required: true,
   },
 })

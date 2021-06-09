@@ -2,11 +2,7 @@
 import { defineProps } from 'vue'
 import { Field, ErrorMessage } from 'vee-validate'
 import type { PropType } from 'vue'
-
-interface RadioChild {
-  text: string
-  value: string
-}
+import type { InputChildren } from '@/type'
 
 defineProps({
   value: {
@@ -30,7 +26,7 @@ defineProps({
     default: false,
   },
   children: {
-    type: Array as PropType<RadioChild[]>,
+    type: Array as PropType<InputChildren[]>,
     required: true,
   },
 })
