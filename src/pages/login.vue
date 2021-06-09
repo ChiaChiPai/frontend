@@ -11,6 +11,6 @@ defineProps({})
     </h1>
     <LoginForm />
     <SSOLogin />
-    <RegisterAccount />
+    <RegisterAccountLinks />
   </AuthLayout>
 </template>

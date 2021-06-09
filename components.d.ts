@@ -5,7 +5,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Header: typeof import('./src/components/Header.vue')['default']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
-    RegisterAccount: typeof import('./src/components/RegisterAccount.vue')['default']
+    RegisterAccountLinks: typeof import('./src/components/RegisterAccountLinks.vue')['default']
     SSOLogin: typeof import('./src/components/SSOLogin.vue')['default']
     TheCheckbox: typeof import('./src/components/TheCheckbox.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']

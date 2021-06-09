@@ -12,7 +12,7 @@ defineProps({})
       <router-link to="/register/org" class="flex-1 btn btn-outline">
         機構單位
       </router-link>
-      <router-link to="/register/person" class="flex-1 btn">
+      <router-link to="/register/personal" class="flex-1 btn">
         一般民眾
       </router-link>
     </div>
