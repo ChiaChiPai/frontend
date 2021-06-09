@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@hannoeru/eslint-config': ^0.1.1
+  '@iconify/json': ^1.1.354
   '@vitejs/plugin-vue': ^1.2.3
   '@vue/compiler-sfc': ^3.1.1
   eslint: ^7.28.0
@@ -22,13 +23,14 @@ dependencies:
 
 devDependencies:
   '@hannoeru/eslint-config': 0.1.1_eslint@7.28.0+typescript@4.3.2
+  '@iconify/json': 1.1.354
   '@vitejs/plugin-vue': 1.2.3_@vue+compiler-sfc@3.1.1
   '@vue/compiler-sfc': 3.1.1_vue@3.1.1
   eslint: 7.28.0
   typescript: 4.3.2
   vite: 2.3.7
   vite-plugin-components: 0.10.4_vite@2.3.7
-  vite-plugin-icons: 0.6.1_@vue+compiler-sfc@3.1.1
+  vite-plugin-icons: 0.6.1_67ee61a323585cf435725c5e60fcf725
   vite-plugin-pages: 0.12.2_vite@2.3.7+vue@3.1.1
   vite-plugin-windicss: 1.0.3_vite@2.3.7
   vue-tsc: 0.1.7_vue@3.1.1
@@ -352,6 +354,10 @@ packages:
 
   /@iconify/json-tools/1.0.10:
     resolution: {integrity: sha512-LFelJDOLZ6JHlmlAkgrvmcu4hpNPB91KYcr4f60D/exzU1eNOb4/KCVHIydGHIQFaOacIOD+Xy+B7P1z812cZg==}
+    dev: true
+
+  /@iconify/json/1.1.354:
+    resolution: {integrity: sha512-zFW5iV4FQmu/Mhn5fUNDtESLJFuQ8Mr9B0vBM2DmKbWJmTuMoF3sfV1w3tXMCvKFAXSTUcBTdXeEYP2rWnA8jA==}
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -4262,7 +4268,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-icons/0.6.1_@vue+compiler-sfc@3.1.1:
+  /vite-plugin-icons/0.6.1_67ee61a323585cf435725c5e60fcf725:
     resolution: {integrity: sha512-OoH+JWK8Kx7Yeud/a2LLmsESs6WTYsn/qAkOdFI4j9Kq/PQn8/YpeTpmDjuTEs0EMe7DUe5OFokBO+dtH3ztCg==}
     peerDependencies:
       '@iconify/json': '*'
@@ -4274,6 +4280,7 @@ packages:
       vue-template-compiler:
         optional: true
     dependencies:
+      '@iconify/json': 1.1.354
       '@iconify/json-tools': 1.0.10
       '@vue/compiler-sfc': 3.1.1_vue@3.1.1
       vue-template-es2015-compiler: 1.9.1
