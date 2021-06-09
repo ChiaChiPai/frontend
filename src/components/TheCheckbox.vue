@@ -28,6 +28,7 @@ defineProps({
     :name="name"
     type="checkbox"
     :value="value"
+    :label="label"
     class="relative w-full pb-6"
     as="div"
   >

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate'
+import { TWCountyList } from '@/data'
 import type { LoginArgs } from '@/logics/auth'
 import type { InputChildren } from '@/types'
 
@@ -9,6 +10,9 @@ const schema = {
   password: 'required|min:8',
   passwordConfirm: 'required|confirmed:@password',
   tel: 'required|numeric',
+  unitType: 'required',
+  unitName: 'required',
+  unitCounty: 'required',
   invoice: 'required',
 }
 
@@ -16,6 +20,21 @@ const initialValues = {
   otherContactType: 'line',
   invoice: 'no',
 }
+
+const unitType: InputChildren[] = [
+  {
+    text: '醫院',
+    value: 'hospital',
+  },
+  {
+    text: '警局',
+    value: 'police-station',
+  },
+  {
+    text: '消防局',
+    value: 'fire-department',
+  },
+]
 
 const otherContactItems: InputChildren[] = [
   {
@@ -51,7 +70,7 @@ function onSubmit(values: LoginArgs) {
 <template>
   <AuthLayout>
     <h1 class="text-xl mb-4">
-      註冊帳號（一般民眾）
+      註冊帳號（一線單位）
     </h1>
     <Form v-slot="{ meta }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
       <TheInput
@@ -91,6 +110,24 @@ function onSubmit(values: LoginArgs) {
         label="聯絡電話（不含『 - 』）"
         placeholder="0901234564"
         autocomplete="tel"
+        required
+      />
+      <TheSelect
+        name="unitType"
+        label="單位類型"
+        :children="unitType"
+        required
+      />
+      <TheInput
+        name="unitName"
+        type="text"
+        label="單位正式名稱"
+        required
+      />
+      <TheSelect
+        name="unitCounty"
+        label="單位縣市"
+        :children="TWCountyList"
         required
       />
       <TheSelect

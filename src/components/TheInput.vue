@@ -43,6 +43,7 @@ const {
   handleChange,
 } = useField(props.name, undefined, {
   initialValue: props.value,
+  label: props.label,
 })
 
 </script>

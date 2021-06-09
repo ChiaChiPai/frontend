@@ -40,7 +40,7 @@ defineProps({
     </label>
     <div class="space-x-3">
       <template v-for="{ value, text } in children" :key="value">
-        <Field :name="name" type="radio" :value="value" /> {{ text }}
+        <Field :name="name" :label="label" type="radio" :value="value" /> {{ text }}
       </template>
     </div>
     <ErrorMessage :name="name" as="p" class="m-0 text-xs bottom-0.5 left-0 text-red-400 absolute" />
