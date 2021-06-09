@@ -1,5 +1,7 @@
 # Shared TW
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eb3e274e-899d-4153-aa44-9928b323cec8/deploy-status)](https://app.netlify.com/sites/shared-tw/deploys)
+
 ## 開發
 
 ```bash
