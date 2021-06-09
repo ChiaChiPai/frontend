@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate'
 import type { LoginArgs } from '@/logics/auth'
-import type { InputChildren } from '@/type'
+import type { InputChildren } from '@/types'
 
 const schema = {
   username: 'required',

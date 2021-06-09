@@ -2,7 +2,7 @@
 import { defineProps } from 'vue'
 import { useField } from 'vee-validate'
 import type { PropType } from 'vue'
-import type { InputChildren } from '@/type'
+import type { InputChildren } from '@/types'
 
 const props = defineProps({
   value: {
