@@ -149,7 +149,7 @@ function onSubmit(values: LoginArgs) {
         required
       />
       <div class="flex justify-between items-center">
-        <router-link to="/" class="text-sm underline">
+        <router-link to="/login" class="text-sm underline">
           取消
         </router-link>
         <button class="btn" type="submit" :disabled="!meta.valid">

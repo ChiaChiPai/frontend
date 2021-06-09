@@ -30,7 +30,7 @@ function onSubmit(values: {
         required
       />
       <div class="flex mb-4 justify-between items-center">
-        <router-link to="/" class="text-sm underline">
+        <router-link to="/login" class="text-sm underline">
           取消
         </router-link>
         <button class="btn" type="submit" :disabled="!meta.valid">
