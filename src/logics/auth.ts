@@ -1,12 +1,9 @@
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStorage, useFetch } from '@vueuse/core'
 import { API_ENDPOINT } from '@/constants'
-
-interface LoginResponse {
-  success: boolean
-  userId: string
-}
+import { AuthApi } from '@/api'
+import type { TokenObtainPair } from '@/api'
 
 interface LogoutResponse {
   success: boolean
@@ -20,33 +17,39 @@ export interface LoginArgs {
 
 export function useAuth() {
   const router = useRouter()
-  const userId = useStorage<string | null>('userId', null, undefined, {
-    serializer: {
-      read(raw) {
-        return raw === 'null' ? null : raw
-      },
-      write(raw) {
-        return String(raw)
-      },
-    },
-  })
+  const userToken = useStorage<string>('access_token', '')
+  const userRefreshToken = useStorage<string>('fresh_token', '')
+  const authApi = new AuthApi(undefined, API_ENDPOINT)
 
   const isAuthorized = computed(() => {
-    return userId.value !== null
+    return userToken.value !== ''
   })
 
   function login(user: LoginArgs) {
-    const { isFetching, error, data } = useFetch(`${API_ENDPOINT}/login`).json<LoginResponse>().post(user)
+    const loading = ref(true)
+    const result = ref<TokenObtainPair | null>(null)
+    const error = ref<any>(null)
 
-    watch(data, (v) => {
-      if (!error.value && v) {
-        router.push('/')
-        userId.value = v.userId
-      }
+    authApi.authTokenCreate({
+      username: user.username,
+      password: user.password,
+    }).then(({ data }) => {
+      const { access, refresh } = data
+
+      userToken.value = access
+      userRefreshToken.value = refresh
+
+      result.value = data
+      loading.value = false
+
+      router.push('/')
+    }).catch((err: Error) => {
+      loading.value = false
+      error.value = err
     })
 
     return {
-      loading: isFetching,
+      loading,
       error,
     }
   }
@@ -68,7 +71,8 @@ export function useAuth() {
     watch(data, (v) => {
       if (!error.value && v) {
         router.push('/')
-        userId.value = null
+        userToken.value = ''
+        userRefreshToken.value = ''
       }
     })
 
@@ -83,7 +87,6 @@ export function useAuth() {
   }
 
   return {
-    userId,
     login,
     loginWithLine,
     loginWithFacebook,
