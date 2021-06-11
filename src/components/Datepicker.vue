@@ -21,6 +21,9 @@ const props = defineProps({
 });
 
 const emit = defineEmit(['update:modelValue']);
+
+const dateInput = ref(null);
+const calendar = ref(null);
 const isShow = ref(false);
 
 const showCalendar = () => { isShow.value = true; };
@@ -94,9 +97,9 @@ const dates = computed(() => {
 const formatDateToDay = (val: Date) => format(val, 'd');
 
 const dayClassObj = (day: TDay) => ({
-  'today bg-secondary' : day.isToday,
-  'current text-gray-600': day.isCurrentMonth,
-  'selected bg-primary text-white': day.isSelected,
+  'today' : day.isToday,
+  'current': day.isCurrentMonth,
+  'selected': day.isSelected,
 });
 
 const nextMonth = () => {
@@ -107,21 +110,15 @@ const prevMonth = () => {
 };
 
 const setSelectedDate =(day: TDay) => {
-  new Promise((res) => {
-    selectedDate.value = day.date;
-    emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'));
-    // change calendar to correct month if they select previous or next month's days
-    if (!day.isCurrentMonth) {
-      const selectedMonth = getMonth(selectedDate.value);
-      currDateCursor.value = setMonth(currDateCursor.value, selectedMonth);
-    }
-    res(true);
-  }).then(() => {
-    hideCalendar();
-  });
+  selectedDate.value = day.date;
+  emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'));
+  // change calendar to correct month if they select previous or next month's days
+  if (!day.isCurrentMonth) {
+    const selectedMonth = getMonth(selectedDate.value);
+    currDateCursor.value = setMonth(currDateCursor.value, selectedMonth);
+  }
+  hideCalendar();
 };
-
-const calendar = ref(null);
 </script>
 <template>
   <div
@@ -140,7 +137,7 @@ const calendar = ref(null);
     />
     <div
       v-if="isShow"
-      class="bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1"
+      class="bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1 z-50"
     >
       <header class="flex items-center justify-around col-span-7">
         <button class="icon-btn text-sm" @click="prevMonth">
@@ -156,15 +153,13 @@ const calendar = ref(null);
       </div>
       <div
         v-for="(day, index) in dates"
-        class="flex items-center justify-center"
+        class="rounded"
         :key="index"
         :class="dayClassObj(day)"
       >
         <button
           @click="setSelectedDate(day)"
-          class="btn bg-white w-full text-gray-300 rounded py-1 px-2
-          flex justify-center
-          focus:bg-primary focus:text-white"
+          class="date-btn"
           :class="dayClassObj(day)"
         >
           {{ formatDateToDay(day.date) }}
@@ -173,3 +168,21 @@ const calendar = ref(null);
     </div>
   </div>
 </template>
+<style>
+.date-btn {
+  @apply outline-none text-gray-400 w-full rounded py-1 px-2
+    flex justify-center focus:bg-primary focus:text-white;
+}
+
+.current {
+  @apply text-gray-600;
+}
+
+.today {
+  @apply bg-secondary text-white;
+}
+
+.selected {
+  @apply  bg-primary text-white;
+}
+</style>
