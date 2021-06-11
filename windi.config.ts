@@ -22,7 +22,7 @@ export default defineConfig({
         '@apply': 'bg-gray-300',
       },
       '&-outline': {
-        '@apply': 'py-1.5 bg-white border border-primary text-primary',
+        '@apply': 'px-3.25 py-1.75 bg-white border border-primary text-primary',
       },
     },
     'icon-btn': {
@@ -34,7 +34,7 @@ export default defineConfig({
     'tag': {
       '@apply': 'inline-block p-1 bg-secondary text-white text-sm font-bold leading-4 rounded-sm',
       '&-outline': {
-        '@apply': 'bg-white border border-secondary text-secondary',
+        '@apply': 'bg-white p-0.75 border border-secondary text-secondary',
       },
     },
     'card': {
