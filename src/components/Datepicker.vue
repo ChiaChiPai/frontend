@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { computed, defineProps, ref, defineEmit } from 'vue';
+import { computed, defineProps, ref, defineEmit } from 'vue'
 import {
   startOfMonth, lastDayOfMonth, addMonths, getDay,
   addDays, isToday, isSameMonth, isSameDay, eachDayOfInterval,
   format, getMonth, setMonth,
-} from 'date-fns';
+} from 'date-fns'
 
 type TDay = {
-  date: Date;
-  isCurrentMonth: boolean;
-  isToday: boolean;
-  isSelected: boolean;
-};
+  date: Date
+  isCurrentMonth: boolean
+  isToday: boolean
+  isSelected: boolean
+}
 
 const props = defineProps({
   modelValue: {
     type: String,
     required: true,
-  }
-});
+  },
+})
 
 const emit = defineEmit(['update:modelValue']);
 
@@ -52,7 +52,7 @@ const MONTH_LABELS_TW = [
   '十一月',
   '十二月',
 ];
-/* 
+/*
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'Th', 'F', 'S'];
 const MONTH_LABELS = [
   'Jan',
@@ -78,23 +78,23 @@ const formatedDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'));
 const curYear = computed(() => currDateCursor.value.getFullYear());
 const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.getMonth()]);
 const dates = computed(() => {
-  const cursorDate = currDateCursor;
-  let startDate = startOfMonth(cursorDate.value);
-  let endDate = lastDayOfMonth(cursorDate.value);
-  const daysNeededForLastMonth = getDay(startDate);
-  const daysNeededForNextMonth = 6 - getDay(endDate);
-  startDate = addDays(startDate, -daysNeededForLastMonth);
-  endDate = addDays(endDate, daysNeededForNextMonth);
-      
+  const cursorDate = currDateCursor
+  let startDate = startOfMonth(cursorDate.value)
+  let endDate = lastDayOfMonth(cursorDate.value)
+  const daysNeededForLastMonth = getDay(startDate)
+  const daysNeededForNextMonth = 6 - getDay(endDate)
+  startDate = addDays(startDate, -daysNeededForLastMonth)
+  endDate = addDays(endDate, daysNeededForNextMonth)
+
   return eachDayOfInterval({ start: startDate, end: endDate }).map((date: Date) => ({
     date,
     isCurrentMonth: isSameMonth(cursorDate.value, date),
     isToday: isToday(date),
-    isSelected: isSameDay(selectedDate.value, date)  
+    isSelected: isSameDay(selectedDate.value, date),
   }));
 });
 
-const formatDateToDay = (val: Date) => format(val, 'd');
+const formatDateToDay = (val: Date) => format(val, 'd')
 
 const dayClassObj = (day: TDay) => ({
   'today' : day.isToday,
@@ -105,6 +105,7 @@ const dayClassObj = (day: TDay) => ({
 const nextMonth = () => {
   currDateCursor.value = addMonths(currDateCursor.value, 1);
 };
+
 const prevMonth = () => {
   currDateCursor.value = addMonths(currDateCursor.value, -1);
 };
@@ -122,11 +123,11 @@ const setSelectedDate =(day: TDay) => {
 </script>
 <template>
   <div
-    class="relative"
     ref="calendar"
     v-close="{
       handler: 'hideCalendar'
     }"
+    class="relative"
   >
     <input
       ref="dateInput"
@@ -134,7 +135,7 @@ const setSelectedDate =(day: TDay) => {
       class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
       readonly
       @focus="showCalendar"
-    />
+    >
     <div
       v-if="isShow"
       class="bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1 z-50"
@@ -148,7 +149,7 @@ const setSelectedDate =(day: TDay) => {
           <mdi:chevron-double-right />
         </button>
       </header>
-      <div class="flex items-center justify-center" v-for="dayLabel in DAY_LABELS_TW">
+      <div v-for="dayLabel in DAY_LABELS_TW" :key="dayLabel" class="flex items-center justify-center">
         {{ dayLabel }}
       </div>
       <div
@@ -158,9 +159,9 @@ const setSelectedDate =(day: TDay) => {
         :class="dayClassObj(day)"
       >
         <button
-          @click="setSelectedDate(day)"
           class="date-btn"
           :class="dayClassObj(day)"
+          @click="setSelectedDate(day)"
         >
           {{ formatDateToDay(day.date) }}
         </button>

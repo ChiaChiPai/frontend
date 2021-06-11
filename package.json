@@ -5,16 +5,24 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "lint": "eslint --ext .js,.ts,.vue,.json .",
-    "lint:fix": "eslint --fix --ext .js,.ts,.vue,.json ."
+    "lint:fix": "eslint --fix --ext .js,.ts,.vue,.json .",
+    "gen:client": "openapi-generator-cli generate -g typescript-axios -i https://shared-tw.herokuapp.com/openapi/schema -o ./src/api/generate"
   },
   "dependencies": {
+    "@vee-validate/i18n": "^4.1.20",
+    "@vee-validate/rules": "^4.1.20",
+    "@vueuse/core": "^5.0.2",
+    "axios": "^0.21.1",
     "date-fns": "^2.22.1",
+    "vee-validate": "^4.4.4",
     "vue": "^3.1.1",
-    "vue-router": "^4.0.8"
+    "vue-router": "^4.0.8",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@hannoeru/eslint-config": "^0.1.1",
+    "@hannoeru/eslint-config": "^0.1.2",
     "@iconify/json": "^1.1.354",
+    "@openapitools/openapi-generator-cli": "^2.3.3",
     "@vitejs/plugin-vue": "^1.2.3",
     "@vue/compiler-sfc": "^3.1.1",
     "eslint": "^7.28.0",

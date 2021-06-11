@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { defineProps, reactive } from 'vue';
-import type { TSupplyInfo } from '@/types';
+import { defineProps, reactive } from 'vue'
+import type { TSupplyInfo } from '@/types'
 
-defineProps({});
+defineProps({})
 
 const data: TSupplyInfo[] = Array.from({ length: 6 }).flatMap((_, i) => [
   {
@@ -43,20 +43,19 @@ const data: TSupplyInfo[] = Array.from({ length: 6 }).flatMap((_, i) => [
   },
 ])
 
-console.log(data);
-const supplyInfos = reactive(data);
+const supplyInfos = reactive(data)
 
 </script>
 
 <template>
   <div class="row">
     <div
-      class="col mb-2"
       v-for="(supplyInfo, idx) in supplyInfos"
       :key="idx + Math.random().toString(36).substring(2, 9)"
+      class="col mb-2"
     >
       <Card
-        :supplyInfo="supplyInfo"
+        :supply-info="supplyInfo"
       />
     </div>
   </div>
