@@ -6,18 +6,24 @@ export default defineConfig({
       colors: {
         primary: '#28B78D',
         secondary: '#17A2B8',
+        line: '#00B900',
+        facebook: '#1778F2',
+        twitter: '#55ACEE',
       },
     },
   },
   shortcuts: {
     'btn': {
-      '@apply': 'px-3.5 py-2 bg-primary text-white rounded-md',
+      '@apply': 'inline-block px-3.5 py-2 bg-primary text-white rounded-md',
       '&:focus': {
         '@apply': 'outline-none',
       },
+      '&:disabled': {
+        '@apply': 'bg-gray-300',
+      },
       '&-outline': {
-        '@apply': 'bg-white text-primary border border-primary'
-      }
+        '@apply': 'py-1.5 bg-white border border-primary text-primary',
+      },
     },
     'icon-btn': {
       '@apply': 'p-2 text-2xl inline-flex items-center',

@@ -4,14 +4,18 @@ import routes from 'virtual:generated-pages';
 import type { DirectiveBinding } from 'vue';
 import App from './App.vue';
 
+// css
 import 'virtual:windi.css';
 import './style/main.css';
 
-const app = createApp(App)
+// plugins
+import './plugins/vee-validate';
+
+const app = createApp(App);
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
 
 app.use(router);
 app.directive('close', {

@@ -10,3 +10,8 @@ export type TSupplyInfo = {
   unit: string;
   ended_date: string;
 }
+
+export interface InputChildren {
+  text: string
+  value: string
+}
