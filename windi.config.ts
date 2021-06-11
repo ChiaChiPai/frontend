@@ -37,5 +37,11 @@ export default defineConfig({
         '@apply': 'bg-white border border-secondary text-secondary',
       },
     },
+    'card': {
+      '@apply': 'border border-gray-300 rounded-md px-4 py-2',
+      '&-header': {
+        '@apply': 'flex items-center justify-between'
+      }
+    }
   },
 })

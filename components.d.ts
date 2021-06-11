@@ -3,7 +3,9 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Card: typeof import('./src/components/Card.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
+    Datepicker: typeof import('./src/components/Datepicker.vue')['default']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     RegisterAccountLinks: typeof import('./src/components/RegisterAccountLinks.vue')['default']
     SSOLogin: typeof import('./src/components/SSOLogin.vue')['default']
