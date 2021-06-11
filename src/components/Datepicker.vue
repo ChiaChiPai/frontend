@@ -169,7 +169,7 @@ const setSelectedDate = (day: TDay) => {
     </div>
   </div>
 </template>
-<style>
+<style scoped lang="postcss">
 .date-btn {
   @apply outline-none text-gray-400 w-full rounded py-1 px-2
     flex justify-center focus:bg-primary focus:text-white;
