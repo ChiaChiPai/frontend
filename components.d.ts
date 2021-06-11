@@ -14,6 +14,7 @@ declare module 'vue' {
     TheRadio: typeof import('./src/components/TheRadio.vue')['default']
     TheSelect: typeof import('./src/components/TheSelect.vue')['default']
     AuthLayout: typeof import('./src/components/layout/AuthLayout.vue')['default']
+    Popover: typeof import('./src/components/Popover.vue')['default']
     'Mdi:checkboxMarkedOutline': typeof import('virtual:vite-icons/mdi/checkbox-marked-outline')['default']
     'Mdi:checkboxBlankOutline': typeof import('virtual:vite-icons/mdi/checkbox-blank-outline')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']

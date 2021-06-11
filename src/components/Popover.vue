@@ -16,20 +16,19 @@ const props = defineProps({
     default: 'bottom-left'
   }
 })
-const defaultPosition =
-  props.placement
-    .split('-')
-    .map((placement, index) => {
-      switch (placement) {
-        case 'left':
-        case 'right':
-          return `${placement}-0`
-        case 'bottom':
-          return 'transform translate-y-full -bottom-2'
-        case 'top':
-          return 'transform -translate-y-full -top-2'
-      }
-    })
+const defaultPosition = props.placement
+  .split('-')
+  .map((placement, index) => {
+    switch (placement) {
+      case 'left':
+      case 'right':
+        return `${placement}-0`
+      case 'bottom':
+        return 'transform translate-y-full -bottom-2'
+      case 'top':
+        return 'transform -translate-y-full -top-2'
+    }
+  })
   .join(' ')
 
 const popover = ref<HTMLDivElement>()
@@ -42,7 +41,7 @@ const closePopover = () => isShow.value = false
 <template>
   <div ref="popover" tabindex="0" class="relative outline-none" @click="openPopover" @blur="closePopover">
     <slot />
-    <div v-if="isShow" class="absolute w-max" :class="defaultPosition">
+    <div v-if="isShow" class="absolute w-max z-50" :class="defaultPosition">
       <div @click.stop="closePopover">
         <slot name="content" />
       </div>
