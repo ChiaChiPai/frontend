@@ -8,13 +8,13 @@ type Placement =
   'bottom-left' |
   'bottom-right' |
   'top-left' |
-  'top-right';
+  'top-right'
 
 const props = defineProps({
   placement: {
     type: String as PropType<Placement>,
-    default: 'bottom-left'
-  }
+    default: 'bottom-left',
+  },
 })
 const defaultPosition = props.placement
   .split('-')
@@ -28,6 +28,7 @@ const defaultPosition = props.placement
       case 'top':
         return 'transform -translate-y-full -top-2'
     }
+    return ''
   })
   .join(' ')
 

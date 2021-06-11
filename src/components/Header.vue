@@ -26,13 +26,12 @@ const menuList = [
 <template>
   <header class="fixed top-0 inset-x-0 border-b bg-white px-2 z-50">
     <div class="container max-w-screen-xl mx-auto h-$header-height flex items-center justify-between text-primary">
-      
       <popover class="icon-btn">
         <ic:round-menu />
         <template #content>
           <ul class="rounded border bg-white -mt-2 ml-2 py-1 text-base text-black">
             <li v-for="(menu, index) in menuList" :key="index" class="py-2.5 px-6 active:text-primary">
-              {{ menu.title}}
+              {{ menu.title }}
             </li>
           </ul>
         </template>
