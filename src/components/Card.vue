@@ -10,7 +10,6 @@ const props = defineProps({
   },
 })
 
-const { supplyInfo } = toRefs(props)
 const {
   id,
   organization,
@@ -18,13 +17,13 @@ const {
   amount,
   unit,
   ended_date,
-} = toRefs(supplyInfo.value)
+} = toRefs(props.supplyInfo)
 </script>
 
 <template>
   <div class="card">
     <div class="card-header">
-      <h2 class="text-xl font-bold py-2">
+      <h2 class="text-xl font-bold">
         {{ organization.name }}
       </h2>
       <span class="tag">{{ organization.type }}</span>

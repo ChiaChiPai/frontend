@@ -48,15 +48,13 @@ const supplyInfos = reactive(data)
 </script>
 
 <template>
-  <div class="row">
-    <div
-      v-for="(supplyInfo, idx) in supplyInfos"
-      :key="idx + Math.random().toString(36).substring(2, 9)"
-      class="col mb-2"
-    >
+  <main>
+    <div class="space-y-3">
       <Card
+        v-for="(supplyInfo, idx) in supplyInfos"
+        :key="idx + Math.random().toString(36).substring(2, 9)"
         :supply-info="supplyInfo"
       />
     </div>
-  </div>
+  </main>
 </template>

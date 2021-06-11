@@ -38,9 +38,9 @@ export default defineConfig({
       },
     },
     'card': {
-      '@apply': 'border border-gray-300 rounded-md px-4 py-2',
+      '@apply': 'border border-gray-300 rounded-md p-4',
       '&-header': {
-        '@apply': 'flex items-center justify-between',
+        '@apply': 'flex items-center justify-between py-1 mb-2',
       },
     },
   },
