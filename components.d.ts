@@ -8,6 +8,7 @@ declare module 'vue' {
     Header: typeof import('./src/components/Header.vue')['default']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     RegisterAccountLinks: typeof import('./src/components/RegisterAccountLinks.vue')['default']
+    RegisterActions: typeof import('./src/components/RegisterActions.vue')['default']
     SSOLogin: typeof import('./src/components/SSOLogin.vue')['default']
     TheCheckbox: typeof import('./src/components/TheCheckbox.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
@@ -19,6 +20,7 @@ declare module 'vue' {
     'Mdi:checkboxBlankOutline': typeof import('virtual:vite-icons/mdi/checkbox-blank-outline')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
+    'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
     'Mdi:chevronDoubleLeft': typeof import('virtual:vite-icons/mdi/chevron-double-left')['default']
     'Mdi:chevronDoubleRight': typeof import('virtual:vite-icons/mdi/chevron-double-right')['default']
   }

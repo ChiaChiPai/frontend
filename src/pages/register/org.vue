@@ -1,69 +1,37 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { syncRef } from '@vueuse/core'
 import { Form } from 'vee-validate'
-import { TWCountyList } from '@/data'
-import type { LoginArgs } from '@/logics/auth'
-import type { InputChildren } from '@/types'
+import { useAuth } from '@/logics/auth'
+import { OtherContactMethodEnum } from '@/api'
+import { TWCountyList, otherContactItems, needInvoiceItems, orgTypes, initialValues } from '@/data'
 
-const schema = {
+import type { ToSchema, RegisterOrgArgs } from '@/types'
+
+const { registerOrg } = useAuth()
+
+const schema: ToSchema<RegisterOrgArgs> = {
   username: 'required',
   email: 'required|email',
   password: 'required|min:8',
   passwordConfirm: 'required|confirmed:@password',
   tel: 'required|numeric',
-  unitType: 'required',
-  unitName: 'required',
-  unitCounty: 'required',
+  orgType: 'required',
+  orgTypeOther: '',
+  orgName: 'required',
+  orgCity: 'required',
+  orgAddress: 'required',
+  orgOfficeHours: 'required',
   invoice: 'required',
+  otherContactType: '',
+  otherContent: '',
 }
 
-const initialValues = {
-  otherContactType: 'line',
-  invoice: 'no',
-}
+const isLoading = ref(false)
 
-const unitType: InputChildren[] = [
-  {
-    text: '醫院',
-    value: 'hospital',
-  },
-  {
-    text: '警局',
-    value: 'police-station',
-  },
-  {
-    text: '消防局',
-    value: 'fire-department',
-  },
-]
-
-const otherContactItems: InputChildren[] = [
-  {
-    text: 'Line',
-    value: 'line',
-  },
-  {
-    text: 'Facebook',
-    value: 'facebook',
-  },
-  {
-    text: 'Telegram',
-    value: 'telegram',
-  },
-]
-
-const needInvoiceItems: InputChildren[] = [
-  {
-    text: '是',
-    value: 'yes',
-  },
-  {
-    text: '否',
-    value: 'no',
-  },
-]
-
-function onSubmit(values: LoginArgs) {
-  alert(JSON.stringify(values, null, 2))
+function onSubmit(values: RegisterOrgArgs) {
+  const { loading } = registerOrg(values)
+  syncRef(loading, isLoading)
 }
 </script>
 
@@ -72,7 +40,7 @@ function onSubmit(values: LoginArgs) {
     <h1 class="text-xl mb-4">
       註冊帳號（一線單位）
     </h1>
-    <Form v-slot="{ meta }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
+    <Form v-slot="{ meta, values }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
       <TheInput
         name="username"
         label="帳號名稱"
@@ -113,21 +81,39 @@ function onSubmit(values: LoginArgs) {
         required
       />
       <TheSelect
-        name="unitType"
+        name="orgType"
         label="單位類型"
-        :children="unitType"
+        :children="orgTypes"
         required
       />
       <TheInput
-        name="unitName"
+        v-if="values.orgType === 'other'"
+        name="orgTypeOther"
+        label=""
+        placeholder="單位類型"
+      />
+      <TheInput
+        name="orgName"
         type="text"
         label="單位正式名稱"
         required
       />
       <TheSelect
-        name="unitCounty"
+        name="orgCity"
         label="單位縣市"
         :children="TWCountyList"
+        required
+      />
+      <TheInput
+        name="orgAddress"
+        type="text"
+        label="單位地址"
+        required
+      />
+      <TheInput
+        name="orgOfficeHours"
+        type="text"
+        label="聯絡時間 (ex. 10:00~17:00)"
         required
       />
       <TheSelect
@@ -136,11 +122,10 @@ function onSubmit(values: LoginArgs) {
         :children="otherContactItems"
       />
       <TheInput
+        v-if="values.otherContactType !== OtherContactMethodEnum.NotSet"
         name="otherContact"
-        type="text"
         label=""
-        placeholder="line / facebook / telegram"
-        autocomplete="tel"
+        :placeholder="otherContactItems.find(item => item.value === values.otherContactType)?.text || ''"
       />
       <TheRadio
         name="invoice"
@@ -148,14 +133,7 @@ function onSubmit(values: LoginArgs) {
         :children="needInvoiceItems"
         required
       />
-      <div class="flex justify-between items-center">
-        <router-link to="/login" class="text-sm underline">
-          取消
-        </router-link>
-        <button class="btn" type="submit" :disabled="!meta.valid">
-          註冊
-        </button>
-      </div>
+      <RegisterActions :is-loading="isLoading" :meta="meta" />
     </Form>
   </AuthLayout>
 </template>

@@ -1,50 +1,31 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Form } from 'vee-validate'
-import type { LoginArgs } from '@/logics/auth'
-import type { InputChildren } from '@/types'
+import { syncRef } from '@vueuse/core'
+import { useAuth } from '@/logics/auth'
+import { OtherContactMethodEnum } from '@/api'
+import { otherContactItems, needInvoiceItems, initialValues } from '@/data'
 
-const schema = {
+import type { ToSchema, RegisterDonatorArgs } from '@/types'
+
+const { registerDonator } = useAuth()
+
+const schema: ToSchema<RegisterDonatorArgs> = {
   username: 'required',
   email: 'required|email',
   password: 'required|min:8',
   passwordConfirm: 'required|confirmed:@password',
   tel: 'required|numeric',
   invoice: 'required',
+  otherContactType: '',
+  otherContent: '',
 }
 
-const initialValues = {
-  otherContactType: 'line',
-  invoice: 'no',
-}
+const isLoading = ref(false)
 
-const otherContactItems: InputChildren[] = [
-  {
-    text: 'Line',
-    value: 'line',
-  },
-  {
-    text: 'Facebook',
-    value: 'facebook',
-  },
-  {
-    text: 'Telegram',
-    value: 'telegram',
-  },
-]
-
-const needInvoiceItems: InputChildren[] = [
-  {
-    text: '是',
-    value: 'yes',
-  },
-  {
-    text: '否',
-    value: 'no',
-  },
-]
-
-function onSubmit(values: LoginArgs) {
-  alert(JSON.stringify(values, null, 2))
+function onSubmit(values: RegisterDonatorArgs) {
+  const { loading } = registerDonator(values)
+  syncRef(loading, isLoading)
 }
 </script>
 
@@ -53,7 +34,7 @@ function onSubmit(values: LoginArgs) {
     <h1 class="text-xl mb-4">
       註冊帳號（一般民眾）
     </h1>
-    <Form v-slot="{ meta }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
+    <Form v-slot="{ meta, values }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
       <TheInput
         name="username"
         label="帳號名稱"
@@ -99,11 +80,11 @@ function onSubmit(values: LoginArgs) {
         :children="otherContactItems"
       />
       <TheInput
+        v-if="values.otherContactType !== OtherContactMethodEnum.NotSet"
         name="otherContact"
         type="text"
         label=""
-        placeholder="line / facebook / telegram"
-        autocomplete="tel"
+        :placeholder="otherContactItems.find(item => item.value === values.otherContactType)?.text || ''"
       />
       <TheRadio
         name="invoice"
@@ -111,14 +92,7 @@ function onSubmit(values: LoginArgs) {
         :children="needInvoiceItems"
         required
       />
-      <div class="flex justify-between items-center">
-        <router-link to="/login" class="text-sm underline">
-          取消
-        </router-link>
-        <button class="btn" type="submit" :disabled="!meta.valid">
-          註冊
-        </button>
-      </div>
+      <RegisterActions :is-loading="isLoading" :meta="meta" />
     </Form>
   </AuthLayout>
 </template>

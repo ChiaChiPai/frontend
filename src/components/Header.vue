@@ -24,7 +24,7 @@ const menuList = [
 </script>
 
 <template>
-  <header class="fixed top-0 inset-x-0 border-b bg-white px-2">
+  <header class="fixed top-0 inset-x-0 border-b bg-white px-2 z-50">
     <div class="container max-w-screen-xl mx-auto h-$header-height flex items-center justify-between text-primary">
       
       <popover class="icon-btn">
