@@ -1,30 +1,32 @@
 <script setup lang="ts">
-import { defineProps, toRefs } from 'vue';
-import type { PropType } from 'vue';
-import type { TSupplyInfo } from '@/types';
+import { defineProps, toRefs } from 'vue'
+import type { PropType } from 'vue'
+import type { TSupplyInfo } from '@/types'
 
 const props = defineProps({
   supplyInfo: {
     type: Object as PropType<TSupplyInfo>,
     required: true,
   },
-});
+})
 
-const { supplyInfo } = toRefs(props);
+const { supplyInfo } = toRefs(props)
 const {
   id,
   organization,
   name,
   amount,
   unit,
-  ended_date
-} = toRefs(supplyInfo.value);
+  ended_date,
+} = toRefs(supplyInfo.value)
 </script>
 
 <template>
   <div class="card">
     <div class="card-header">
-      <h2 class="text-xl font-bold py-2">{{ organization.name }}</h2>
+      <h2 class="text-xl font-bold py-2">
+        {{ organization.name }}
+      </h2>
       <span class="tag">{{ organization.type }}</span>
     </div>
     <span class="tag tag-outline">{{ organization.city }}</span>
@@ -43,7 +45,9 @@ const {
       </div>
     </div>
     <div class="flex justify-end">
-      <router-link class="btn" :to="`/apply?id=${id}`">我要幫忙</router-link>
+      <router-link class="btn" :to="`/apply?id=${id}`">
+        我要幫忙
+      </router-link>
     </div>
   </div>
 </template>

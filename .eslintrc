@@ -6,6 +6,12 @@
       "rules": {
         "eslint-comments/no-unlimited-disable": "off"
       }
+    },
+    {
+      "files": ["src/data/*"],
+      "rules": {
+        "jsonc/no-useless-escape": "off"
+      }
     }
   ]
 }
