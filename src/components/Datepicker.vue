@@ -20,11 +20,14 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmit(['update:modelValue'])
-const isShow = ref(false)
+const emit = defineEmit(['update:modelValue']);
 
-const showCalendar = () => { isShow.value = true }
-const hideCalendar = () => { isShow.value = false }
+const dateInput = ref(null);
+const calendar = ref(null);
+const isShow = ref(false);
+
+const showCalendar = () => { isShow.value = true; };
+const hideCalendar = () => { isShow.value = false; };
 
 const DAY_LABELS_TW = [
   '日',
@@ -34,7 +37,7 @@ const DAY_LABELS_TW = [
   '四',
   '五',
   '六',
-]
+];
 const MONTH_LABELS_TW = [
   '一月',
   '二月',
@@ -48,7 +51,7 @@ const MONTH_LABELS_TW = [
   '十月',
   '十一月',
   '十二月',
-]
+];
 /*
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'Th', 'F', 'S'];
 const MONTH_LABELS = [
@@ -67,13 +70,13 @@ const MONTH_LABELS = [
 ];
 */
 
-const currDateCursor = ref(new Date(props.modelValue))
-const selectedDate = ref(new Date(props.modelValue))
+const currDateCursor = ref(new Date(props.modelValue));
+const selectedDate = ref(new Date(props.modelValue));
 
-const formatedDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'))
+const formatedDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'));
 
-const curYear = computed(() => currDateCursor.value.getFullYear())
-const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.getMonth()])
+const curYear = computed(() => currDateCursor.value.getFullYear());
+const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.getMonth()]);
 const dates = computed(() => {
   const cursorDate = currDateCursor
   let startDate = startOfMonth(cursorDate.value)
@@ -88,40 +91,35 @@ const dates = computed(() => {
     isCurrentMonth: isSameMonth(cursorDate.value, date),
     isToday: isToday(date),
     isSelected: isSameDay(selectedDate.value, date),
-  }))
-})
+  }));
+});
 
 const formatDateToDay = (val: Date) => format(val, 'd')
 
 const dayClassObj = (day: TDay) => ({
-  'today bg-secondary': day.isToday,
-  'current text-gray-600': day.isCurrentMonth,
-  'selected bg-primary text-white': day.isSelected,
-})
+  'today' : day.isToday,
+  'current': day.isCurrentMonth,
+  'selected': day.isSelected,
+});
 
 const nextMonth = () => {
-  currDateCursor.value = addMonths(currDateCursor.value, 1)
-}
+  currDateCursor.value = addMonths(currDateCursor.value, 1);
+};
+
 const prevMonth = () => {
-  currDateCursor.value = addMonths(currDateCursor.value, -1)
-}
+  currDateCursor.value = addMonths(currDateCursor.value, -1);
+};
 
-const setSelectedDate = (day: TDay) => {
-  new Promise((resolve) => {
-    selectedDate.value = day.date
-    emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'))
-    // change calendar to correct month if they select previous or next month's days
-    if (!day.isCurrentMonth) {
-      const selectedMonth = getMonth(selectedDate.value)
-      currDateCursor.value = setMonth(currDateCursor.value, selectedMonth)
-    }
-    resolve(true)
-  }).then(() => {
-    hideCalendar()
-  })
-}
-
-const calendar = ref(null)
+const setSelectedDate =(day: TDay) => {
+  selectedDate.value = day.date;
+  emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'));
+  // change calendar to correct month if they select previous or next month's days
+  if (!day.isCurrentMonth) {
+    const selectedMonth = getMonth(selectedDate.value);
+    currDateCursor.value = setMonth(currDateCursor.value, selectedMonth);
+  }
+  hideCalendar();
+};
 </script>
 <template>
   <div
@@ -140,7 +138,7 @@ const calendar = ref(null)
     >
     <div
       v-if="isShow"
-      class="bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1"
+      class="bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1 z-50"
     >
       <header class="flex items-center justify-around col-span-7">
         <button class="icon-btn text-sm" @click="prevMonth">
@@ -156,14 +154,12 @@ const calendar = ref(null)
       </div>
       <div
         v-for="(day, index) in dates"
+        class="rounded"
         :key="index"
-        class="flex items-center justify-center"
         :class="dayClassObj(day)"
       >
         <button
-          class="btn bg-white w-full text-gray-300 rounded py-1 px-2
-          flex justify-center
-          focus:bg-primary focus:text-white"
+          class="date-btn"
           :class="dayClassObj(day)"
           @click="setSelectedDate(day)"
         >
@@ -173,3 +169,21 @@ const calendar = ref(null)
     </div>
   </div>
 </template>
+<style>
+.date-btn {
+  @apply outline-none text-gray-400 w-full rounded py-1 px-2
+    flex justify-center focus:bg-primary focus:text-white;
+}
+
+.current {
+  @apply text-gray-600;
+}
+
+.today {
+  @apply bg-secondary text-white;
+}
+
+.selected {
+  @apply  bg-primary text-white;
+}
+</style>
