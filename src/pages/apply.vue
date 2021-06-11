@@ -79,8 +79,8 @@ const checkedItemLen = computed(() =>
           </div>
         </div>
         <div class="flex flex-col items-end">
-          <label for="apply">
-            <input id="apply" v-model="supply.provide.applyCheck" type="checkbox" class="hidden">
+          <label :for="`apply-${key}`">
+            <input :id="`apply-${key}`" v-model="supply.provide.applyCheck" type="checkbox" class="hidden">
             <span class="flex items-center text-lg text-gray-600">
               <span class="mr-2">申請</span>
               <mdi:checkbox-marked-outline v-if="supply.provide.applyCheck" />
