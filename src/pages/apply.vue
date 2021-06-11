@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { computed, defineProps, reactive } from 'vue'
+/* eslint-disable no-console */
+import {
+  computed, defineProps, reactive, ref,
+  watchEffect,
+} from 'vue'
 import { useRoute } from 'vue-router'
-import { format } from 'date-fns'
+import { format, isBefore, isEqual } from 'date-fns'
 import Datepicker from '@/components/Datepicker.vue'
 
 defineProps({})
 
 const route = useRoute()
 const { id } = route.query
+
+const isDisabled = ref(true)
 const supplyInfo = reactive({
   id,
   organization: {
@@ -28,19 +34,37 @@ const supplyInfo = reactive({
   })),
 })
 
+watchEffect(() => {
+  const checkSupply = supplyInfo.supplies
+    .filter(supply => supply.provide.applyCheck)
+
+  if (checkSupply.length) {
+    isDisabled.value = !checkSupply
+      .every(supply => supply.provide.amount
+        && supply.amount >= supply.provide.amount
+        && (isBefore(new Date(supply.provide.date), new Date(supply.ended_date))
+          || isEqual(new Date(supply.provide.date), new Date(supply.ended_date))
+        ))
+  }
+})
+
 const checkedItemLen = computed(() =>
   supplyInfo.supplies.filter(el => el.provide.applyCheck).length,
 )
 </script>
 
 <template>
-  <div class="pb-10">
+  <div class="pb-12">
     <div class="card mb-2 flex items-center justify-between">
       <h2 class="text-xl font-bold py-2">
         {{ supplyInfo.organization.name }}
       </h2>
-      <span class="tag ml-auto">{{ supplyInfo.organization.type }}</span>
-      <span class="tag tag-outline ml-2 ">{{ supplyInfo.organization.city }}</span>
+      <span class="tag ml-auto">
+        {{ supplyInfo.organization.type }}
+      </span>
+      <span class="tag tag-outline ml-2 ">
+        {{ supplyInfo.organization.city }}
+      </span>
     </div>
     <div
       v-for="(supply, key) in supplyInfo.supplies"
@@ -79,8 +103,13 @@ const checkedItemLen = computed(() =>
           </div>
         </div>
         <div class="flex flex-col items-end">
-          <label for="apply">
-            <input id="apply" v-model="supply.provide.applyCheck" type="checkbox" class="hidden">
+          <label :for="`apply-${key}`">
+            <input
+              :id="`apply-${key}`"
+              v-model="supply.provide.applyCheck"
+              type="checkbox"
+              class="hidden"
+            >
             <span class="flex items-center text-lg text-gray-600">
               <span class="mr-2">申請</span>
               <mdi:checkbox-marked-outline v-if="supply.provide.applyCheck" />
@@ -91,15 +120,22 @@ const checkedItemLen = computed(() =>
       </div>
     </div>
   </div>
-  <div class="fixed bg-white left-0 right-0 bottom-0 py-2 px-3 border flex items-center justify-between">
-    <span>已勾選 {{ checkedItemLen }} 項</span>
-    <div>
-      <router-link class="btn btn-outline mr-2" to="/">
-        取消
-      </router-link>
-      <button class="btn">
-        確認申請
-      </button>
+  <div class="toolbar">
+    <div class="max-w-screen-xl mx-auto flex items-center justify-between">
+      <span class="px-2">已勾選 {{ checkedItemLen }} 項</span>
+      <div>
+        <router-link class="btn btn-outline mr-2" to="/">
+          取消
+        </router-link>
+        <button class="btn" :disabled="isDisabled">
+          確認申請
+        </button>
+      </div>
     </div>
   </div>
 </template>
+<style lang="postcss">
+.toolbar {
+  @apply fixed bg-white inset-x-0 bottom-0 py-2 px-3 border;
+}
+</style>
