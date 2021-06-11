@@ -14,6 +14,8 @@ declare module 'vue' {
     TheRadio: typeof import('./src/components/TheRadio.vue')['default']
     TheSelect: typeof import('./src/components/TheSelect.vue')['default']
     AuthLayout: typeof import('./src/components/layout/AuthLayout.vue')['default']
+    'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
+    'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
   }
 }
 
