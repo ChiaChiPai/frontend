@@ -5,6 +5,7 @@ import App from './App.vue'
 
 // css
 import 'virtual:windi.css'
+import './style/vars.css'
 import './style/main.css'
 
 // plugins
