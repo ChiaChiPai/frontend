@@ -1,25 +1,63 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps, reactive } from 'vue';
+import type { TSupplyInfo } from '@/types';
 
-defineProps({})
+defineProps({});
 
-const msg = ref('Hello Vue 3 + TypeScript + Vite')
+const data: TSupplyInfo[] = Array.from({ length: 6 }).flatMap((_, i) => [
+  {
+    id: `${(i * 3) + 1}`,
+    organization: {
+      type: '醫院',
+      name: '臺大醫院',
+      city: '臺北市',
+    },
+    name: '維尼熊',
+    amount: 200,
+    unit: '隻',
+    ended_date: '2021-06-16',
+  },
+  {
+    id: `${(i * 3) + 2}`,
+    organization: {
+      type: '消防局',
+      name: '淡水消防局',
+      city: '新北市',
+    },
+    name: 'N95',
+    amount: 200,
+    unit: '個',
+    ended_date: '2021-06-16',
+  },
+  {
+    id: `${(i * 3) + 3}`,
+    organization: {
+      type: '警察局',
+      name: '臥龍派出所',
+      city: '桃園市',
+    },
+    name: '誠實豆沙包',
+    amount: 200,
+    unit: '個',
+    ended_date: '2021-06-16',
+  },
+])
+
+console.log(data);
+const supplyInfos = reactive(data);
+
 </script>
 
 <template>
-  <div>{{ msg }}</div>
-  <h2 class="text-xl font-bold py-2">
-    Components
-  </h2>
-  <div class="space-x-2">
-    <button class="btn">
-      我要幫忙
-    </button>
-    <span class="tag">
-      醫院
-    </span>
-    <span class="tag tag-outline">
-      臺北市
-    </span>
+  <div class="row">
+    <div
+      class="col mb-2"
+      v-for="(supplyInfo, idx) in supplyInfos"
+      :key="idx + Math.random().toString(36).substring(2, 9)"
+    >
+      <Card
+        :supplyInfo="supplyInfo"
+      />
+    </div>
   </div>
 </template>
