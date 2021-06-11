@@ -1,13 +1,11 @@
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useStorage, useFetch } from '@vueuse/core'
-import { API_ENDPOINT } from '@/constants'
-import { AuthApi } from '@/api'
+import { useStorage } from '@vueuse/core'
+import { authApi } from '@/api'
 import type { TokenObtainPair } from '@/api'
 
-interface LogoutResponse {
-  success: boolean
-}
+export const userToken = useStorage<string>('access_token', '')
+export const userRefreshToken = useStorage<string>('fresh_token', '')
 
 export interface LoginArgs {
   username: string
@@ -17,9 +15,6 @@ export interface LoginArgs {
 
 export function useAuth() {
   const router = useRouter()
-  const userToken = useStorage<string>('access_token', '')
-  const userRefreshToken = useStorage<string>('fresh_token', '')
-  const authApi = new AuthApi(undefined, API_ENDPOINT)
 
   const isAuthorized = computed(() => {
     return userToken.value !== ''
@@ -66,20 +61,9 @@ export function useAuth() {
   }
 
   function logout() {
-    const { isFetching, error, data } = useFetch(`${API_ENDPOINT}/logout`).json<LogoutResponse>().post()
-
-    watch(data, (v) => {
-      if (!error.value && v) {
-        router.push('/')
-        userToken.value = ''
-        userRefreshToken.value = ''
-      }
-    })
-
-    return {
-      loading: isFetching,
-      error,
-    }
+    userToken.value = ''
+    userRefreshToken.value = ''
+    router.push('/')
   }
 
   function resetPassword(email: string) {
