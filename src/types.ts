@@ -23,7 +23,6 @@ export interface InputChildren {
 export interface LoginArgs {
   username: string
   password: string
-  remember: boolean
 }
 
 export interface RegisterDonatorArgs {

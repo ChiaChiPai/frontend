@@ -11,7 +11,6 @@ const { login } = useAuth()
 const schema = {
   username: 'required',
   password: 'required|min:8',
-  remember: '',
 }
 
 const isLoading = ref(false)
@@ -37,10 +36,6 @@ function onSubmit(values: LoginArgs) {
       label="密碼"
       placeholder="password"
       autocomplete="current-password"
-    />
-    <TheCheckbox
-      name="remember"
-      label="記住我"
     />
     <div class="flex mb-6 justify-between items-center">
       <router-link to="/account/password_reset" class="text-sm underline">

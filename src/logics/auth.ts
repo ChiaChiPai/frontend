@@ -28,10 +28,8 @@ export function useAuth() {
     }).then(({ data }) => {
       const { access, refresh } = data
 
-      if (user.remember) {
-        userToken.value = access
-        userRefreshToken.value = refresh
-      }
+      userToken.value = access
+      userRefreshToken.value = refresh
 
       result.value = data
       loading.value = false
@@ -98,7 +96,6 @@ export function useAuth() {
       return login({
         username,
         password,
-        remember: true,
       })
     }).catch((err: Error) => {
       loading.value = false
@@ -152,7 +149,6 @@ export function useAuth() {
       return login({
         username,
         password,
-        remember: true,
       })
     }).catch((err: Error) => {
       loading.value = false
