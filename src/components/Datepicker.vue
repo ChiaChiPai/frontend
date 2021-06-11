@@ -145,18 +145,30 @@ useEventListener(document, 'touchstart', handleOutsideClick)
     >
     <div
       v-if="isShow"
-      class="bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1 z-50"
+      class="calendar-container"
     >
       <header class="flex items-center justify-around col-span-7">
-        <button class="icon-btn text-sm" @click="prevMonth">
+        <button
+          class="icon-btn text-sm"
+          @click="prevMonth"
+        >
           <mdi:chevron-double-left />
         </button>
-        <span class="p-2">{{ curMonth }} {{ curYear }}</span>
-        <button class="icon-btn text-sm" @click="nextMonth">
+        <span class="p-2">
+          {{ curMonth }} {{ curYear }}
+        </span>
+        <button
+          class="icon-btn text-sm"
+          @click="nextMonth"
+        >
           <mdi:chevron-double-right />
         </button>
       </header>
-      <div v-for="dayLabel in DAY_LABELS_TW" :key="dayLabel" class="flex items-center justify-center">
+      <div
+        v-for="dayLabel in DAY_LABELS_TW"
+        :key="dayLabel"
+        class="flex items-center justify-center"
+      >
         {{ dayLabel }}
       </div>
       <div
@@ -177,6 +189,9 @@ useEventListener(document, 'touchstart', handleOutsideClick)
   </div>
 </template>
 <style scoped lang="postcss">
+.calendar-container {
+  @apply bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1 z-2;
+}
 .date-btn {
   @apply outline-none text-gray-400 w-full rounded py-1 px-2
     flex justify-center focus:bg-primary focus:text-white;
