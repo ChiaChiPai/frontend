@@ -14,8 +14,12 @@ declare module 'vue' {
     TheRadio: typeof import('./src/components/TheRadio.vue')['default']
     TheSelect: typeof import('./src/components/TheSelect.vue')['default']
     AuthLayout: typeof import('./src/components/layout/AuthLayout.vue')['default']
+    'Mdi:checkboxMarkedOutline': typeof import('virtual:vite-icons/mdi/checkbox-marked-outline')['default']
+    'Mdi:checkboxBlankOutline': typeof import('virtual:vite-icons/mdi/checkbox-blank-outline')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
+    'Mdi:chevronDoubleLeft': typeof import('virtual:vite-icons/mdi/chevron-double-left')['default']
+    'Mdi:chevronDoubleRight': typeof import('virtual:vite-icons/mdi/chevron-double-right')['default']
   }
 }
 
