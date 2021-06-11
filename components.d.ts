@@ -7,6 +7,7 @@ declare module 'vue' {
     Datepicker: typeof import('./src/components/Datepicker.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
+    Popover: typeof import('./src/components/Popover.vue')['default']
     RegisterAccountLinks: typeof import('./src/components/RegisterAccountLinks.vue')['default']
     RegisterActions: typeof import('./src/components/RegisterActions.vue')['default']
     SSOLogin: typeof import('./src/components/SSOLogin.vue')['default']
@@ -15,14 +16,9 @@ declare module 'vue' {
     TheRadio: typeof import('./src/components/TheRadio.vue')['default']
     TheSelect: typeof import('./src/components/TheSelect.vue')['default']
     AuthLayout: typeof import('./src/components/layout/AuthLayout.vue')['default']
-    Popover: typeof import('./src/components/Popover.vue')['default']
-    'Mdi:checkboxMarkedOutline': typeof import('virtual:vite-icons/mdi/checkbox-marked-outline')['default']
-    'Mdi:checkboxBlankOutline': typeof import('virtual:vite-icons/mdi/checkbox-blank-outline')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
     'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
-    'Mdi:chevronDoubleLeft': typeof import('virtual:vite-icons/mdi/chevron-double-left')['default']
-    'Mdi:chevronDoubleRight': typeof import('virtual:vite-icons/mdi/chevron-double-right')['default']
   }
 }
 

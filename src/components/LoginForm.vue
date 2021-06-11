@@ -1,26 +1,35 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate'
-import type { LoginArgs } from '@/logics/auth'
+import { useAuth } from '@/logics/auth'
+import { ref } from 'vue'
+import { syncRef } from '@vueuse/core'
+
+import type { LoginArgs } from '@/types'
+
+const { login } = useAuth()
 
 const schema = {
-  email: 'required|email',
+  username: 'required',
   password: 'required|min:8',
   remember: '',
 }
 
+const isLoading = ref(false)
+
 function onSubmit(values: LoginArgs) {
-  alert(JSON.stringify(values, null, 2))
+  const { loading } = login(values)
+  syncRef(loading, isLoading)
 }
 </script>
 
 <template>
   <Form v-slot="{ meta }" :validation-schema="schema" @submit="onSubmit">
     <TheInput
-      name="email"
-      type="email"
+      name="username"
+      type="text"
       label="帳號"
-      placeholder="user@example.com"
-      autocomplete="email"
+      placeholder="username"
+      autocomplete="username"
     />
     <TheInput
       name="password"
@@ -37,8 +46,9 @@ function onSubmit(values: LoginArgs) {
       <router-link to="/account/password_reset" class="text-sm underline">
         忘記密碼
       </router-link>
-      <button class="btn" type="submit" :disabled="!meta.valid">
-        登入
+      <button class="btn inline-flex items-center h-40px" type="submit" :disabled="!meta.valid">
+        <mdi:loading v-if="isLoading" class="animate-spin text-lg" />
+        <span v-else>登入</span>
       </button>
     </div>
   </Form>

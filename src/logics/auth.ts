@@ -2,19 +2,13 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStorage } from '@vueuse/core'
 import { authApi, registerApi } from '@/api'
-import { RegisterDonatorArgs, RegisterOrgArgs } from '@/types'
+import { RegisterDonatorArgs, RegisterOrgArgs, LoginArgs } from '@/types'
 
 import type { TokenObtainPair } from '@/api'
 
 export const userId = useStorage<string>('user_id', '')
 export const userToken = useStorage<string>('access_token', '')
 export const userRefreshToken = useStorage<string>('fresh_token', '')
-
-export interface LoginArgs {
-  username: string
-  password: string
-  remember: boolean
-}
 
 export function useAuth() {
   const router = useRouter()

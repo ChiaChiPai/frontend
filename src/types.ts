@@ -20,6 +20,12 @@ export interface InputChildren {
   value: string
 }
 
+export interface LoginArgs {
+  username: string
+  password: string
+  remember: boolean
+}
+
 export interface RegisterDonatorArgs {
   username: string
   email: string
