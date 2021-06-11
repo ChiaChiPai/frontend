@@ -42,7 +42,7 @@ const closePopover = () => isShow.value = false
 <template>
   <div ref="popover" tabindex="0" class="relative outline-none" @click="openPopover" @blur="closePopover">
     <slot />
-    <div v-if="isShow" class="absolute" :class="defaultPosition">
+    <div v-if="isShow" class="absolute w-max" :class="defaultPosition">
       <div @click.stop="closePopover">
         <slot name="content" />
       </div>
