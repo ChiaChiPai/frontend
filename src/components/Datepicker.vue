@@ -20,14 +20,14 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmit(['update:modelValue']);
+const emit = defineEmit(['update:modelValue'])
 
-const dateInput = ref(null);
-const calendar = ref(null);
-const isShow = ref(false);
+const dateInput = ref(null)
+const calendar = ref(null)
+const isShow = ref(false)
 
-const showCalendar = () => { isShow.value = true; };
-const hideCalendar = () => { isShow.value = false; };
+const showCalendar = () => { isShow.value = true }
+const hideCalendar = () => { isShow.value = false }
 
 const DAY_LABELS_TW = [
   '日',
@@ -37,7 +37,7 @@ const DAY_LABELS_TW = [
   '四',
   '五',
   '六',
-];
+]
 const MONTH_LABELS_TW = [
   '一月',
   '二月',
@@ -51,7 +51,7 @@ const MONTH_LABELS_TW = [
   '十月',
   '十一月',
   '十二月',
-];
+]
 /*
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'Th', 'F', 'S'];
 const MONTH_LABELS = [
@@ -70,13 +70,13 @@ const MONTH_LABELS = [
 ];
 */
 
-const currDateCursor = ref(new Date(props.modelValue));
-const selectedDate = ref(new Date(props.modelValue));
+const currDateCursor = ref(new Date(props.modelValue))
+const selectedDate = ref(new Date(props.modelValue))
 
-const formatedDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'));
+const formatedDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'))
 
-const curYear = computed(() => currDateCursor.value.getFullYear());
-const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.getMonth()]);
+const curYear = computed(() => currDateCursor.value.getFullYear())
+const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.getMonth()])
 const dates = computed(() => {
   const cursorDate = currDateCursor
   let startDate = startOfMonth(cursorDate.value)
@@ -91,35 +91,35 @@ const dates = computed(() => {
     isCurrentMonth: isSameMonth(cursorDate.value, date),
     isToday: isToday(date),
     isSelected: isSameDay(selectedDate.value, date),
-  }));
-});
+  }))
+})
 
 const formatDateToDay = (val: Date) => format(val, 'd')
 
 const dayClassObj = (day: TDay) => ({
-  'today' : day.isToday,
-  'current': day.isCurrentMonth,
-  'selected': day.isSelected,
-});
+  today: day.isToday,
+  current: day.isCurrentMonth,
+  selected: day.isSelected,
+})
 
 const nextMonth = () => {
-  currDateCursor.value = addMonths(currDateCursor.value, 1);
-};
+  currDateCursor.value = addMonths(currDateCursor.value, 1)
+}
 
 const prevMonth = () => {
-  currDateCursor.value = addMonths(currDateCursor.value, -1);
-};
+  currDateCursor.value = addMonths(currDateCursor.value, -1)
+}
 
-const setSelectedDate =(day: TDay) => {
-  selectedDate.value = day.date;
-  emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'));
+const setSelectedDate = (day: TDay) => {
+  selectedDate.value = day.date
+  emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'))
   // change calendar to correct month if they select previous or next month's days
   if (!day.isCurrentMonth) {
-    const selectedMonth = getMonth(selectedDate.value);
-    currDateCursor.value = setMonth(currDateCursor.value, selectedMonth);
+    const selectedMonth = getMonth(selectedDate.value)
+    currDateCursor.value = setMonth(currDateCursor.value, selectedMonth)
   }
-  hideCalendar();
-};
+  hideCalendar()
+}
 </script>
 <template>
   <div
@@ -154,8 +154,8 @@ const setSelectedDate =(day: TDay) => {
       </div>
       <div
         v-for="(day, index) in dates"
-        class="rounded"
         :key="index"
+        class="rounded"
         :class="dayClassObj(day)"
       >
         <button
