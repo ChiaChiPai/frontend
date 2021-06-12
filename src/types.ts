@@ -44,3 +44,29 @@ export interface RegisterOrgArgs extends RegisterDonatorArgs {
   orgAddress: string
   orgOfficeHours: string
 }
+
+export interface SupplyProvide {
+  amount: number
+  date: string
+  applyCheck: boolean
+}
+
+export interface SupplyOrg {
+  type: string
+  name: string
+  city: string
+}
+
+export interface Supply {
+  name: string
+  amount: number
+  unit: '個'
+  ended_date: string
+  provide: SupplyProvide
+}
+
+export interface SupplyInfo {
+  id: number
+  organization: SupplyOrg
+  supplies: Supply[]
+}

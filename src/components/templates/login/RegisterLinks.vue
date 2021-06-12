@@ -9,12 +9,12 @@ defineProps({})
   <div class="border-t pt-2">
     <span class="py-2 block">註冊帳號：</span>
     <div class="flex space-x-4 text-center">
-      <router-link to="/register/org" class="flex-1 btn btn-outline">
+      <AppLink to="/register/org" class="flex-1" outline>
         一線單位
-      </router-link>
-      <router-link to="/register/donator" class="flex-1 btn">
+      </AppLink>
+      <AppLink to="/register/donator" class="flex-1">
         一般民眾
-      </router-link>
+      </AppLink>
     </div>
   </div>
 </template>

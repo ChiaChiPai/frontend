@@ -26,9 +26,11 @@ const {
       <h2 class="text-xl font-bold">
         {{ organization.name }}
       </h2>
-      <span class="tag">{{ organization.type }}</span>
+      <AppLabel>{{ organization.type }}</AppLabel>
     </div>
-    <span class="tag tag-outline">{{ organization.city }}</span>
+    <AppLabel outline>
+      {{ organization.city }}
+    </AppLabel>
     <div class="py-3 flex justify-between">
       <div>
         <h3>需求物資</h3>
@@ -44,9 +46,9 @@ const {
       </div>
     </div>
     <div class="flex justify-end">
-      <router-link class="btn" :to="`/apply?id=${id}`">
+      <AppLink :to="`/apply?id=${id}`">
         我要幫忙
-      </router-link>
+      </AppLink>
     </div>
   </div>
 </template>

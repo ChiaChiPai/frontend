@@ -23,14 +23,14 @@ function onSubmit(values: LoginArgs) {
 
 <template>
   <Form v-slot="{ meta }" :validation-schema="schema" @submit="onSubmit">
-    <TheInput
+    <AppInput
       name="username"
       type="text"
       label="帳號"
       placeholder="username"
       autocomplete="username"
     />
-    <TheInput
+    <AppInput
       name="password"
       type="password"
       label="密碼"
@@ -41,10 +41,10 @@ function onSubmit(values: LoginArgs) {
       <router-link to="/account/password_reset" class="text-sm underline">
         忘記密碼
       </router-link>
-      <button class="btn inline-flex items-center h-40px" type="submit" :disabled="!meta.valid">
-        <mdi:loading v-if="isLoading" class="animate-spin text-lg" />
+      <AppButton type="submit" :disabled="!meta.valid">
+        <IconLoading v-if="isLoading" />
         <span v-else>登入</span>
-      </button>
+      </AppButton>
     </div>
   </Form>
 </template>

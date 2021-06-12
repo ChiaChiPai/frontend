@@ -6,8 +6,7 @@ defineProps({})
 </script>
 
 <template>
-  <AuthLayout>
-    <RegisterDonatorTitle />
-    <RegisterDonator />
-  </AuthLayout>
+  <AppTitle>
+    註冊帳號（一線單位）
+  </AppTitle>
 </template>
