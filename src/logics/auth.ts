@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { useStorage } from '@vueuse/core'
 import { authApi, registerApi } from '@/api'
 import { RegisterDonatorArgs, RegisterOrgArgs, LoginArgs } from '@/types'
+import { flash, EmitTypes } from '@/logics/emitter'
 
 import type { TokenObtainPair } from '@/api'
 
@@ -35,11 +36,15 @@ export function useAuth() {
       loading.value = false
 
       router.push('/')
+
+      flash('登入成功', EmitTypes.Success)
     }).catch((err: Error) => {
       loading.value = false
       error.value = err
       // eslint-disable-next-line no-console
       console.error(err)
+
+      flash('登入失敗', EmitTypes.Danger)
     })
 
     return {
@@ -63,6 +68,8 @@ export function useAuth() {
     userToken.value = ''
     userRefreshToken.value = ''
     router.push('/')
+
+    flash('已登出', EmitTypes.Success)
   }
 
   function resetPassword(email: string) {
@@ -93,6 +100,9 @@ export function useAuth() {
       const { id } = data
       userId.value = `${id}`
       loading.value = false
+
+      flash('註冊成功', EmitTypes.Success)
+
       return login({
         username,
         password,
@@ -100,6 +110,9 @@ export function useAuth() {
     }).catch((err: Error) => {
       loading.value = false
       error.value = err.message
+
+      flash('註冊失敗', EmitTypes.Danger)
+
       // eslint-disable-next-line no-console
       console.error(err)
     })
@@ -146,6 +159,9 @@ export function useAuth() {
       const { id } = data
       userId.value = `${id}`
       loading.value = false
+
+      flash('註冊成功', EmitTypes.Success)
+
       return login({
         username,
         password,
@@ -153,6 +169,9 @@ export function useAuth() {
     }).catch((err: Error) => {
       loading.value = false
       error.value = err.message
+
+      flash('註冊失敗', EmitTypes.Danger)
+
       // eslint-disable-next-line no-console
       console.error(err)
     })
