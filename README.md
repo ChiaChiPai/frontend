@@ -41,6 +41,10 @@ pnpm server
   - template: `<template>`
   - style: `<style scoped lang="postcss">`
 
+## Design System
+
+- [Atomic Design](https://atomicdesign.bradfrost.com/table-of-contents/)
+
 ## Vite 插件功能
 
 ### 資料夾類
