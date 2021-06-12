@@ -60,8 +60,8 @@ export function useAuth() {
   function loginWithFacebook() {
     alert('Login with Facebook')
   }
-  function loginWithTwitter() {
-    alert('Login with Twitter')
+  function loginWithGoogle() {
+    alert('Login with Google')
   }
 
   function logout() {
@@ -186,7 +186,7 @@ export function useAuth() {
     login,
     loginWithLine,
     loginWithFacebook,
-    loginWithTwitter,
+    loginWithGoogle,
     logout,
     isAuthorized,
     resetPassword,

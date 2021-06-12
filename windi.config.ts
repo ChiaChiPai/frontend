@@ -9,6 +9,7 @@ export default defineConfig({
         line: '#00B900',
         facebook: '#1778F2',
         twitter: '#55ACEE',
+        google: '#EA4335',
       },
     },
   },

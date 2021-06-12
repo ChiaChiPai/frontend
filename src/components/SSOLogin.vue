@@ -4,7 +4,7 @@ import { useAuth } from '@/logics/auth'
 const {
   loginWithLine,
   loginWithFacebook,
-  loginWithTwitter,
+  loginWithGoogle,
 } = useAuth()
 
 </script>
@@ -17,8 +17,8 @@ const {
     <button class="btn w-full bg-facebook" @click="loginWithFacebook">
       Facebook 登入
     </button>
-    <button class="btn w-full bg-twitter" @click="loginWithTwitter">
-      Twitter 登入
+    <button class="btn w-full bg-google" @click="loginWithGoogle">
+      Google 登入
     </button>
   </div>
 </template>
