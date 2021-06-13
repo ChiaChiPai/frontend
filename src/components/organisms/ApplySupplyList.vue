@@ -60,8 +60,8 @@ defineProps({
           >
           <span class="flex items-center text-lg text-gray-600">
             <span class="mr-2">申請</span>
-            <mdi:checkbox-marked-outline v-if="supply.provide.applyCheck" />
-            <mdi:checkbox-blank-outline v-else />
+            <uil:check-square v-if="supply.provide.applyCheck" />
+            <uil:square v-else />
           </span>
         </label>
       </div>

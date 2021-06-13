@@ -152,7 +152,7 @@ useEventListener(document, 'touchstart', handleOutsideClick)
           class="icon-btn text-sm"
           @click="prevMonth"
         >
-          <mdi:chevron-double-left />
+          <uil:angle-double-left />
         </button>
         <span class="p-2">
           {{ curMonth }} {{ curYear }}
@@ -161,7 +161,7 @@ useEventListener(document, 'touchstart', handleOutsideClick)
           class="icon-btn text-sm"
           @click="nextMonth"
         >
-          <mdi:chevron-double-right />
+          <uil:angle-double-right />
         </button>
       </header>
       <div

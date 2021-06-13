@@ -41,11 +41,11 @@ declare module 'vue' {
     JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
-    'Mdi:checkboxMarkedOutline': typeof import('virtual:vite-icons/mdi/checkbox-marked-outline')['default']
-    'Mdi:checkboxBlankOutline': typeof import('virtual:vite-icons/mdi/checkbox-blank-outline')['default']
+    'Uil:checkSquare': typeof import('virtual:vite-icons/uil/check-square')['default']
+    'Uil:square': typeof import('virtual:vite-icons/uil/square')['default']
     'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
-    'Mdi:chevronDoubleLeft': typeof import('virtual:vite-icons/mdi/chevron-double-left')['default']
-    'Mdi:chevronDoubleRight': typeof import('virtual:vite-icons/mdi/chevron-double-right')['default']
+    'Uil:angleDoubleLeft': typeof import('virtual:vite-icons/uil/angle-double-left')['default']
+    'Uil:angleDoubleRight': typeof import('virtual:vite-icons/uil/angle-double-right')['default']
   }
 }
 
