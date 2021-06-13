@@ -6,7 +6,7 @@
     "serve": "vite preview",
     "lint": "eslint --ext .js,.ts,.vue,.json .",
     "lint:fix": "eslint --fix --ext .js,.ts,.vue,.json .",
-    "gen:client": "openapi-generator-cli generate -g typescript-axios -i https://shared-tw.herokuapp.com/openapi/schema -o ./src/api/generate"
+    "gen:client": "openapi-generator-cli generate -g typescript-axios -i https://shared-tw.herokuapp.com/openapi.json -o ./src/api/generate"
   },
   "dependencies": {
     "@vee-validate/i18n": "^4.4.4",

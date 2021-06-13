@@ -1,5 +1,5 @@
 <template>
   <main>
-    <NotFount />
+    <NotFound />
   </main>
 </template>

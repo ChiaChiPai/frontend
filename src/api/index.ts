@@ -1,11 +1,7 @@
 import { API_ENDPOINT } from '@/constants'
-import { AuthApi, RegisterApi, TypeEnum } from './generate'
+import { AuthenticationApi, DefaultApi } from './generate'
 
-export const authApi = new AuthApi(undefined, API_ENDPOINT)
-export const registerApi = new RegisterApi(undefined, API_ENDPOINT)
-
-export {
-  TypeEnum as OrgTypeEnum,
-}
+export const authApi = new AuthenticationApi(undefined, API_ENDPOINT)
+export const registerApi = new DefaultApi(undefined, API_ENDPOINT)
 
 export * from './generate'

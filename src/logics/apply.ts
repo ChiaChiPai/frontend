@@ -1,16 +1,16 @@
 import { computed, reactive, ref, watch } from 'vue'
-// import { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { format, isBefore, isEqual } from 'date-fns'
 
 import type { SupplyInfo } from '@/types'
 
 export function useApply() {
-  // const route = useRoute()
-  // const { id } = route.query
+  const route = useRoute()
+  const id = route.query.id as string
 
   const isDisabled = ref(true)
   const supplyInfo = reactive<SupplyInfo>({
-    id: 0,
+    id: parseInt(id),
     organization: {
       type: '醫院',
       name: '臺大醫院',

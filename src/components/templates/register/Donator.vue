@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { Form } from 'vee-validate'
 import { syncRef } from '@vueuse/core'
 import { useAuth } from '@/logics/auth'
-import { OtherContactMethodEnum } from '@/api'
+import { ContactMethods } from '@/api'
 import { otherContactItems, needInvoiceItems, initialValues } from '@/data'
 
 import type { ToSchema, RegisterDonatorArgs } from '@/types'
@@ -76,7 +76,7 @@ function onSubmit(values: RegisterDonatorArgs) {
       :children="otherContactItems"
     />
     <AppInput
-      v-if="values.otherContactType !== OtherContactMethodEnum.NotSet"
+      v-if="values.otherContactType !== ContactMethods.NotSet"
       name="otherContact"
       type="text"
       label=""

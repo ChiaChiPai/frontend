@@ -5,7 +5,7 @@ import { authApi, registerApi } from '@/api'
 import { RegisterDonatorArgs, RegisterOrgArgs, LoginArgs } from '@/types'
 import { flash, EmitTypes } from '@/logics/emitter'
 
-import type { TokenObtainPair } from '@/api'
+import type { JWTToken } from '@/api'
 
 export const userId = useStorage<string>('user_id', '')
 export const userToken = useStorage<string>('access_token', '')
@@ -20,17 +20,17 @@ export function useAuth() {
 
   function login(user: LoginArgs) {
     const loading = ref(true)
-    const result = ref<TokenObtainPair | null>(null)
+    const result = ref<JWTToken | null>(null)
     const error = ref<any>(null)
 
-    authApi.authTokenCreate({
+    authApi.authenticatorApiCreateJwtToken({
       username: user.username,
       password: user.password,
     }).then(({ data }) => {
       const { access, refresh } = data
 
       userToken.value = access
-      userRefreshToken.value = refresh
+      userRefreshToken.value = refresh || ''
 
       result.value = data
       loading.value = false
@@ -89,7 +89,7 @@ export function useAuth() {
     const loading = ref(true)
     const error = ref<any>(null)
 
-    registerApi.registerDonatorCreate({
+    registerApi.shareApiCreateDonator({
       username,
       password,
       confirmed_password: passwordConfirm,
@@ -142,7 +142,7 @@ export function useAuth() {
     const loading = ref(true)
     const error = ref<any>(null)
 
-    registerApi.registerOrganizationCreate({
+    registerApi.shareApiCreateOrganization({
       username,
       password,
       confirmed_password: passwordConfirm,

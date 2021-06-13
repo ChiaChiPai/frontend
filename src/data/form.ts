@@ -1,22 +1,22 @@
-import { OtherContactMethodEnum, OrgTypeEnum } from '@/api'
+import { ContactMethods, OrganizationTypes } from '@/api'
 import { InputChildren } from '@/types'
 
 export const otherContactItems: InputChildren[] = [
   {
     text: '無',
-    value: OtherContactMethodEnum.NotSet,
+    value: ContactMethods.NotSet,
   },
   {
     text: 'Line',
-    value: OtherContactMethodEnum.Line,
+    value: ContactMethods.Line,
   },
   {
     text: 'Facebook',
-    value: OtherContactMethodEnum.Fb,
+    value: ContactMethods.Fb,
   },
   {
     text: 'Email',
-    value: OtherContactMethodEnum.Email,
+    value: ContactMethods.Email,
   },
 ]
 
@@ -34,23 +34,23 @@ export const needInvoiceItems: InputChildren[] = [
 export const orgTypes: InputChildren[] = [
   {
     text: '醫院',
-    value: OrgTypeEnum.Hospital,
+    value: OrganizationTypes.Hospital,
   },
   {
     text: '警局',
-    value: OrgTypeEnum.PoliceStation,
+    value: OrganizationTypes.PoliceStation,
   },
   {
     text: '消防局',
-    value: OrgTypeEnum.FireDepartment,
+    value: OrganizationTypes.FireDepartment,
   },
   {
     text: '其他',
-    value: OrgTypeEnum.Other,
+    value: OrganizationTypes.Other,
   },
 ]
 
 export const initialValues = {
-  otherContactType: OtherContactMethodEnum.NotSet,
+  otherContactType: ContactMethods.NotSet,
   invoice: 'no',
 }

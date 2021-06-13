@@ -1,4 +1,4 @@
-import { OtherContactMethodEnum, OrgTypeEnum, CityEnum } from '@/api'
+import { ContactMethods, OrganizationTypes, Cities } from '@/api'
 
 export type ToSchema<T> = { [P in keyof T]: string }
 
@@ -32,15 +32,15 @@ export interface RegisterDonatorArgs {
   passwordConfirm: string
   tel: string
   invoice: string
-  otherContactType: OtherContactMethodEnum
+  otherContactType: ContactMethods
   otherContent: string | undefined
 }
 
 export interface RegisterOrgArgs extends RegisterDonatorArgs {
-  orgType: OrgTypeEnum
+  orgType: OrganizationTypes
   orgTypeOther: string | undefined
   orgName: string
-  orgCity: CityEnum
+  orgCity: Cities
   orgAddress: string
   orgOfficeHours: string
 }
