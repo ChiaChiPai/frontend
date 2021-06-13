@@ -23,7 +23,7 @@ export function useAuth() {
     const result = ref<JWTToken | null>(null)
     const error = ref<any>(null)
 
-    authApi.authenticatorApiCreateJwtToken({
+    authApi.createJwtToken({
       username: user.username,
       password: user.password,
     }).then(({ data }) => {
@@ -89,7 +89,7 @@ export function useAuth() {
     const loading = ref(true)
     const error = ref<any>(null)
 
-    registerApi.shareApiCreateDonator({
+    registerApi.createDonator({
       username,
       password,
       confirmed_password: passwordConfirm,
@@ -142,7 +142,7 @@ export function useAuth() {
     const loading = ref(true)
     const error = ref<any>(null)
 
-    registerApi.shareApiCreateOrganization({
+    registerApi.createOrganization({
       username,
       password,
       confirmed_password: passwordConfirm,

@@ -544,9 +544,9 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authenticatorApiCreateJwtToken: async (jWTTokenCreation: JWTTokenCreation, options: any = {}): Promise<RequestArgs> => {
+        createJwtToken: async (jWTTokenCreation: JWTTokenCreation, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'jWTTokenCreation' is not null or undefined
-            assertParamExists('authenticatorApiCreateJwtToken', 'jWTTokenCreation', jWTTokenCreation)
+            assertParamExists('createJwtToken', 'jWTTokenCreation', jWTTokenCreation)
             const localVarPath = `/auth/token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -580,9 +580,9 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authenticatorApiRefreshJwtToken: async (jWTRefreshToken: JWTRefreshToken, options: any = {}): Promise<RequestArgs> => {
+        refreshJwtToken: async (jWTRefreshToken: JWTRefreshToken, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'jWTRefreshToken' is not null or undefined
-            assertParamExists('authenticatorApiRefreshJwtToken', 'jWTRefreshToken', jWTRefreshToken)
+            assertParamExists('refreshJwtToken', 'jWTRefreshToken', jWTRefreshToken)
             const localVarPath = `/auth/token/refresh`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -626,8 +626,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authenticatorApiCreateJwtToken(jWTTokenCreation: JWTTokenCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authenticatorApiCreateJwtToken(jWTTokenCreation, options);
+        async createJwtToken(jWTTokenCreation: JWTTokenCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createJwtToken(jWTTokenCreation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -637,8 +637,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authenticatorApiRefreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authenticatorApiRefreshJwtToken(jWTRefreshToken, options);
+        async refreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.refreshJwtToken(jWTRefreshToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -658,8 +658,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authenticatorApiCreateJwtToken(jWTTokenCreation: JWTTokenCreation, options?: any): AxiosPromise<JWTToken> {
-            return localVarFp.authenticatorApiCreateJwtToken(jWTTokenCreation, options).then((request) => request(axios, basePath));
+        createJwtToken(jWTTokenCreation: JWTTokenCreation, options?: any): AxiosPromise<JWTToken> {
+            return localVarFp.createJwtToken(jWTTokenCreation, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -668,8 +668,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authenticatorApiRefreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any): AxiosPromise<JWTToken> {
-            return localVarFp.authenticatorApiRefreshJwtToken(jWTRefreshToken, options).then((request) => request(axios, basePath));
+        refreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any): AxiosPromise<JWTToken> {
+            return localVarFp.refreshJwtToken(jWTRefreshToken, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -689,8 +689,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public authenticatorApiCreateJwtToken(jWTTokenCreation: JWTTokenCreation, options?: any) {
-        return AuthenticationApiFp(this.configuration).authenticatorApiCreateJwtToken(jWTTokenCreation, options).then((request) => request(this.axios, this.basePath));
+    public createJwtToken(jWTTokenCreation: JWTTokenCreation, options?: any) {
+        return AuthenticationApiFp(this.configuration).createJwtToken(jWTTokenCreation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -701,8 +701,8 @@ export class AuthenticationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public authenticatorApiRefreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any) {
-        return AuthenticationApiFp(this.configuration).authenticatorApiRefreshJwtToken(jWTRefreshToken, options).then((request) => request(this.axios, this.basePath));
+    public refreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any) {
+        return AuthenticationApiFp(this.configuration).refreshJwtToken(jWTRefreshToken, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -720,9 +720,9 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiCreateOrganizationRequiredItem: async (requiredItemCreation: RequiredItemCreation, options: any = {}): Promise<RequestArgs> => {
+        createOrganizationRequiredItem: async (requiredItemCreation: RequiredItemCreation, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'requiredItemCreation' is not null or undefined
-            assertParamExists('shareApiCreateOrganizationRequiredItem', 'requiredItemCreation', requiredItemCreation)
+            assertParamExists('createOrganizationRequiredItem', 'requiredItemCreation', requiredItemCreation)
             const localVarPath = `/organization/required-items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -760,7 +760,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiListOrganizationRequiredItems: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+        listOrganizationRequiredItems: async (page?: number, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/organization/required-items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -809,8 +809,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async shareApiCreateOrganizationRequiredItem(requiredItemCreation: RequiredItemCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RequiredItem>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.shareApiCreateOrganizationRequiredItem(requiredItemCreation, options);
+        async createOrganizationRequiredItem(requiredItemCreation: RequiredItemCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RequiredItem>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createOrganizationRequiredItem(requiredItemCreation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -820,8 +820,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async shareApiListOrganizationRequiredItems(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedResponseSchemaRequiredItem>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.shareApiListOrganizationRequiredItems(page, options);
+        async listOrganizationRequiredItems(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedResponseSchemaRequiredItem>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listOrganizationRequiredItems(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -841,8 +841,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiCreateOrganizationRequiredItem(requiredItemCreation: RequiredItemCreation, options?: any): AxiosPromise<RequiredItem> {
-            return localVarFp.shareApiCreateOrganizationRequiredItem(requiredItemCreation, options).then((request) => request(axios, basePath));
+        createOrganizationRequiredItem(requiredItemCreation: RequiredItemCreation, options?: any): AxiosPromise<RequiredItem> {
+            return localVarFp.createOrganizationRequiredItem(requiredItemCreation, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -851,8 +851,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiListOrganizationRequiredItems(page?: number, options?: any): AxiosPromise<PaginatedResponseSchemaRequiredItem> {
-            return localVarFp.shareApiListOrganizationRequiredItems(page, options).then((request) => request(axios, basePath));
+        listOrganizationRequiredItems(page?: number, options?: any): AxiosPromise<PaginatedResponseSchemaRequiredItem> {
+            return localVarFp.listOrganizationRequiredItems(page, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -872,8 +872,8 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public shareApiCreateOrganizationRequiredItem(requiredItemCreation: RequiredItemCreation, options?: any) {
-        return OrganizationApiFp(this.configuration).shareApiCreateOrganizationRequiredItem(requiredItemCreation, options).then((request) => request(this.axios, this.basePath));
+    public createOrganizationRequiredItem(requiredItemCreation: RequiredItemCreation, options?: any) {
+        return OrganizationApiFp(this.configuration).createOrganizationRequiredItem(requiredItemCreation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -884,8 +884,8 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public shareApiListOrganizationRequiredItems(page?: number, options?: any) {
-        return OrganizationApiFp(this.configuration).shareApiListOrganizationRequiredItems(page, options).then((request) => request(this.axios, this.basePath));
+    public listOrganizationRequiredItems(page?: number, options?: any) {
+        return OrganizationApiFp(this.configuration).listOrganizationRequiredItems(page, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -903,7 +903,7 @@ export const PublicApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiListRequiredItems: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+        listRequiredItems: async (page?: number, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/required-items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -948,8 +948,8 @@ export const PublicApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async shareApiListRequiredItems(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedResponseSchemaGroupedRequiredItems>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.shareApiListRequiredItems(page, options);
+        async listRequiredItems(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedResponseSchemaGroupedRequiredItems>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRequiredItems(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -969,8 +969,8 @@ export const PublicApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiListRequiredItems(page?: number, options?: any): AxiosPromise<PaginatedResponseSchemaGroupedRequiredItems> {
-            return localVarFp.shareApiListRequiredItems(page, options).then((request) => request(axios, basePath));
+        listRequiredItems(page?: number, options?: any): AxiosPromise<PaginatedResponseSchemaGroupedRequiredItems> {
+            return localVarFp.listRequiredItems(page, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -990,8 +990,8 @@ export class PublicApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PublicApi
      */
-    public shareApiListRequiredItems(page?: number, options?: any) {
-        return PublicApiFp(this.configuration).shareApiListRequiredItems(page, options).then((request) => request(this.axios, this.basePath));
+    public listRequiredItems(page?: number, options?: any) {
+        return PublicApiFp(this.configuration).listRequiredItems(page, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -1009,9 +1009,9 @@ export const RegisterApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiCreateDonator: async (donatorCreation: DonatorCreation, options: any = {}): Promise<RequestArgs> => {
+        createDonator: async (donatorCreation: DonatorCreation, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'donatorCreation' is not null or undefined
-            assertParamExists('shareApiCreateDonator', 'donatorCreation', donatorCreation)
+            assertParamExists('createDonator', 'donatorCreation', donatorCreation)
             const localVarPath = `/register/donator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1045,9 +1045,9 @@ export const RegisterApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiCreateOrganization: async (organizationCreation: OrganizationCreation, options: any = {}): Promise<RequestArgs> => {
+        createOrganization: async (organizationCreation: OrganizationCreation, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationCreation' is not null or undefined
-            assertParamExists('shareApiCreateOrganization', 'organizationCreation', organizationCreation)
+            assertParamExists('createOrganization', 'organizationCreation', organizationCreation)
             const localVarPath = `/register/organization`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1091,8 +1091,8 @@ export const RegisterApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async shareApiCreateDonator(donatorCreation: DonatorCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Donator>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.shareApiCreateDonator(donatorCreation, options);
+        async createDonator(donatorCreation: DonatorCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Donator>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createDonator(donatorCreation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1102,8 +1102,8 @@ export const RegisterApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async shareApiCreateOrganization(organizationCreation: OrganizationCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.shareApiCreateOrganization(organizationCreation, options);
+        async createOrganization(organizationCreation: OrganizationCreation, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createOrganization(organizationCreation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1123,8 +1123,8 @@ export const RegisterApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiCreateDonator(donatorCreation: DonatorCreation, options?: any): AxiosPromise<Donator> {
-            return localVarFp.shareApiCreateDonator(donatorCreation, options).then((request) => request(axios, basePath));
+        createDonator(donatorCreation: DonatorCreation, options?: any): AxiosPromise<Donator> {
+            return localVarFp.createDonator(donatorCreation, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1133,8 +1133,8 @@ export const RegisterApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        shareApiCreateOrganization(organizationCreation: OrganizationCreation, options?: any): AxiosPromise<Organization> {
-            return localVarFp.shareApiCreateOrganization(organizationCreation, options).then((request) => request(axios, basePath));
+        createOrganization(organizationCreation: OrganizationCreation, options?: any): AxiosPromise<Organization> {
+            return localVarFp.createOrganization(organizationCreation, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1154,8 +1154,8 @@ export class RegisterApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RegisterApi
      */
-    public shareApiCreateDonator(donatorCreation: DonatorCreation, options?: any) {
-        return RegisterApiFp(this.configuration).shareApiCreateDonator(donatorCreation, options).then((request) => request(this.axios, this.basePath));
+    public createDonator(donatorCreation: DonatorCreation, options?: any) {
+        return RegisterApiFp(this.configuration).createDonator(donatorCreation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1166,8 +1166,8 @@ export class RegisterApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RegisterApi
      */
-    public shareApiCreateOrganization(organizationCreation: OrganizationCreation, options?: any) {
-        return RegisterApiFp(this.configuration).shareApiCreateOrganization(organizationCreation, options).then((request) => request(this.axios, this.basePath));
+    public createOrganization(organizationCreation: OrganizationCreation, options?: any) {
+        return RegisterApiFp(this.configuration).createOrganization(organizationCreation, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
