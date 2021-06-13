@@ -11,14 +11,14 @@ defineProps({
 </script>
 
 <template>
-  <div class="card mb-2 flex items-center justify-between">
-    <h2 class="text-xl font-bold py-2">
+  <div class="mb-2 flex items-center py-3 px-1">
+    <h2 class="text-xl font-bold mr-auto">
       {{ org.name }}
     </h2>
-    <AppLabel class="ml-auto">
+    <AppLabel class="mr-2">
       {{ org.type }}
     </AppLabel>
-    <AppLabel class="ml-2" outline>
+    <AppLabel outline>
       {{ org.city }}
     </AppLabel>
   </div>

@@ -21,8 +21,8 @@ const {
 </script>
 
 <template>
-  <div class="card">
-    <div class="card-header">
+  <div class="border border-gray-300 rounded-md p-4">
+    <div class="flex items-center justify-between py-1 mb-2">
       <h2 class="text-xl font-bold">
         {{ organization.name }}
       </h2>
