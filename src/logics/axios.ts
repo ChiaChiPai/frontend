@@ -24,7 +24,7 @@ axios.interceptors.response.use(
       // if refresh token exists in local storage proceed
       try {
         // try refreshing token
-        const { data } = await authApi.authTokenRefreshCreate({
+        const { data } = await authApi.authenticatorApiRefreshJwtToken({
           refresh: userRefreshToken.value,
         })
         const accessToken = data.access
