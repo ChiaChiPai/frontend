@@ -1,8 +1,3 @@
 <template>
-  <AuthLayout>
-    <LoginTitle />
-    <LoginFormInput />
-    <LoginSSOButtons />
-    <LoginRegisterLinks />
-  </AuthLayout>
+  <LoginPage />
 </template>

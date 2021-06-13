@@ -2,7 +2,7 @@
 import { defineProps } from 'vue'
 
 defineProps({
-  info: {
+  org: {
     type: Object,
     required: true,
   },
@@ -13,13 +13,13 @@ defineProps({
 <template>
   <div class="card mb-2 flex items-center justify-between">
     <h2 class="text-xl font-bold py-2">
-      {{ info.organization.name }}
+      {{ org.name }}
     </h2>
     <AppLabel class="ml-auto">
-      {{ info.organization.type }}
+      {{ org.type }}
     </AppLabel>
     <AppLabel class="ml-2" outline>
-      {{ info.organization.city }}
+      {{ org.city }}
     </AppLabel>
   </div>
 </template>

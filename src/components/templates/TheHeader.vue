@@ -36,9 +36,7 @@ const menuList = [
           </ul>
         </template>
       </AppPopover>
-      <router-link to="/" class="block">
-        <img src="/img/logo.png" alt="Shared TW" class="h-55px">
-      </router-link>
+      <AppLogo class="h-55px" />
       <div :class="{'opacity-0 pointer-events-none': $route.path === '/login'}">
         <button v-if="isAuthorized" class="icon-btn">
           <ic:round-account-circle />

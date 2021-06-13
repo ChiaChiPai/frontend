@@ -45,7 +45,7 @@ defineProps({
         </span>
         <div class="w-6/12">
           <h3>可贊助日期</h3>
-          <Datepicker
+          <AppDatepicker
             v-model="supply.provide.date"
           />
         </div>
