@@ -30,7 +30,7 @@ defineProps({
     <AppLink :to="link.href" inline>
       {{ link.content }}
     </AppLink>
-    <AppButton type="submit" :disabled="!meta.valid">
+    <AppButton type="submit" :disabled="!meta.valid" class="inline-flex">
       <IconLoading v-if="isLoading" />
       <span v-else>
         {{ buttonName }}
