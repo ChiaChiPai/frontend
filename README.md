@@ -31,6 +31,7 @@ pnpm server
 
 - Vetur - `octref.vetur`
 - Tailwind CSS IntelliSense - `bradlc.vscode-tailwindcss`
+- Auto Rename Tag - `formulahendry.auto-rename-tag`
 
 使用推薦 Extensions
 
