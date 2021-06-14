@@ -14,6 +14,7 @@ declare module 'vue' {
     FormErrorMessage: typeof import('./src/components/atoms/FormErrorMessage.vue')['default']
     IconLoading: typeof import('./src/components/atoms/IconLoading.vue')['default']
     FlashMessage: typeof import('./src/components/global/FlashMessage.vue')['default']
+    AppCheckbox: typeof import('./src/components/molecules/AppCheckbox.vue')['default']
     AppDatepicker: typeof import('./src/components/molecules/AppDatepicker.vue')['default']
     AppPopover: typeof import('./src/components/molecules/AppPopover.vue')['default']
     FormActions: typeof import('./src/components/molecules/FormActions.vue')['default']
@@ -40,14 +41,16 @@ declare module 'vue' {
     RegisterOrg: typeof import('./src/components/templates/RegisterOrg.vue')['default']
     ResetPassword: typeof import('./src/components/templates/ResetPassword.vue')['default']
     TheHeader: typeof import('./src/components/templates/TheHeader.vue')['default']
+    JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
-    JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']
+    'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
+    'Uil:checkCircle': typeof import('virtual:vite-icons/uil/check-circle')['default']
+    'Uil:circle': typeof import('virtual:vite-icons/uil/circle')['default']
     'Uil:checkSquare': typeof import('virtual:vite-icons/uil/check-square')['default']
     'Uil:square': typeof import('virtual:vite-icons/uil/square')['default']
     'Uil:angleDoubleLeft': typeof import('virtual:vite-icons/uil/angle-double-left')['default']
     'Uil:angleDoubleRight': typeof import('virtual:vite-icons/uil/angle-double-right')['default']
-    'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
   }
 }
 
