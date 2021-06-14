@@ -1,8 +1,12 @@
 # Shared TW
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/eb3e274e-899d-4153-aa44-9928b323cec8/deploy-status)](https://app.netlify.com/sites/shared-tw/deploys)
+<a href="https://www.netlify.com">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+</a>
 
 ## 開發
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eb3e274e-899d-4153-aa44-9928b323cec8/deploy-status)](https://app.netlify.com/sites/shared-tw/deploys)
 
 ```bash
 # install pnpm package manager
