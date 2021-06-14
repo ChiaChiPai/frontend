@@ -54,20 +54,17 @@ const {
       {{ label }}
       <span v-if="required" class="text-red-400">*</span>
     </label>
-    <input
+    <AppInput
       :id="name"
       :name="name"
       :type="type"
       :value="inputValue"
       :autocomplete="autocomplete"
       :placeholder="placeholder"
-      class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
-      :class="{ 'border-red-400': !!errorMessage }"
+      :error="!!errorMessage"
       @input="handleChange"
       @blur="handleBlur"
-    >
-    <p v-show="errorMessage" class="m-0 text-xs bottom-0.5 left-0 text-red-400 absolute">
-      {{ errorMessage }}
-    </p>
+    />
+    <FormErrorMessage :name="name" />
   </div>
 </template>

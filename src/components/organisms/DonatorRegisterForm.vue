@@ -31,14 +31,14 @@ function onSubmit(values: RegisterDonatorArgs) {
 
 <template>
   <Form v-slot="{ meta, values }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
-    <AppInput
+    <FormInput
       name="username"
       label="帳號名稱"
       placeholder="username"
       autocomplete="username"
       required
     />
-    <AppInput
+    <FormInput
       name="email"
       type="email"
       label="電子郵件信箱"
@@ -46,7 +46,7 @@ function onSubmit(values: RegisterDonatorArgs) {
       autocomplete="email"
       required
     />
-    <AppInput
+    <FormInput
       name="password"
       type="password"
       label="密碼"
@@ -54,7 +54,7 @@ function onSubmit(values: RegisterDonatorArgs) {
       autocomplete="new-password"
       required
     />
-    <AppInput
+    <FormInput
       name="passwordConfirm"
       type="password"
       label="確認密碼"
@@ -62,7 +62,7 @@ function onSubmit(values: RegisterDonatorArgs) {
       autocomplete="current-password"
       required
     />
-    <AppInput
+    <FormInput
       name="tel"
       type="tel"
       label="聯絡電話（不含『 - 』）"
@@ -70,24 +70,32 @@ function onSubmit(values: RegisterDonatorArgs) {
       autocomplete="tel"
       required
     />
-    <AppSelect
+    <FormSelect
       name="otherContactType"
       label="其他聯絡方式"
       :children="otherContactItems"
     />
-    <AppInput
+    <FormInput
       v-if="values.otherContactType !== ContactMethods.NotSet"
       name="otherContact"
       type="text"
       label=""
       :placeholder="otherContactItems.find(item => item.value === values.otherContactType)?.text || ''"
     />
-    <AppRadio
+    <FormRadio
       name="invoice"
       label="是否需要收據"
       :children="needInvoiceItems"
       required
     />
-    <RegisterActions :is-loading="isLoading" :meta="meta" />
+    <FormActions
+      button-name="註冊"
+      :link="{
+        content: '取消',
+        href: '/login'
+      }"
+      :is-loading="isLoading"
+      :meta="meta"
+    />
   </Form>
 </template>

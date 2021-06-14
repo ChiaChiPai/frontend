@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { Field, ErrorMessage } from 'vee-validate'
+import { Field } from 'vee-validate'
 import type { PropType } from 'vue'
 import type { InputChildren } from '@/types'
 
@@ -43,6 +43,6 @@ defineProps({
         <Field :name="name" :label="label" type="radio" :value="value" /> {{ text }}
       </template>
     </div>
-    <ErrorMessage :name="name" as="p" class="m-0 text-xs bottom-0.5 left-0 text-red-400 absolute" />
+    <FormErrorMessage :name="name" />
   </div>
 </template>

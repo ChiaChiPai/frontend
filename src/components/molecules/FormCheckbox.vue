@@ -24,7 +24,7 @@ defineProps({
 
 <template>
   <Field
-    v-slot="{ field, errorMessage }"
+    v-slot="{ field }"
     :name="name"
     type="checkbox"
     :value="value"
@@ -36,8 +36,6 @@ defineProps({
       <input type="checkbox" :name="name" v-bind="field" :value="value" :disabled="disabled">
       {{ label }}
     </label>
-    <p v-show="errorMessage" class="absolute left-0 bottom-0.5 m-0 text-xs text-red-400">
-      {{ errorMessage }}
-    </p>
+    <FormErrorMessage :name="name" />
   </Field>
 </template>

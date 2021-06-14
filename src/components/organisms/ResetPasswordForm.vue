@@ -17,7 +17,7 @@ function onSubmit(values: {
 
 <template>
   <Form v-slot="{ meta }" :validation-schema="schema" @submit="onSubmit">
-    <AppInput
+    <FormInput
       name="email"
       type="email"
       label="電子郵件信箱"

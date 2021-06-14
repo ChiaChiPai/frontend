@@ -22,29 +22,29 @@ function onSubmit(values: LoginArgs) {
 </script>
 
 <template>
-  <Form v-slot="{ meta }" :validation-schema="schema" @submit="onSubmit">
-    <AppInput
+  <Form v-slot="{ meta }" :validation-schema="schema" class="mb-6" @submit="onSubmit">
+    <FormInput
       name="username"
       type="text"
       label="帳號"
       placeholder="username"
       autocomplete="username"
     />
-    <AppInput
+    <FormInput
       name="password"
       type="password"
       label="密碼"
       placeholder="password"
       autocomplete="current-password"
     />
-    <div class="flex mb-6 justify-between items-center">
-      <router-link to="/account/password_reset" class="text-sm underline">
-        忘記密碼
-      </router-link>
-      <AppButton type="submit" :disabled="!meta.valid">
-        <IconLoading v-if="isLoading" />
-        <span v-else>登入</span>
-      </AppButton>
-    </div>
+    <FormActions
+      button-name="登入"
+      :link="{
+        content: '忘記密碼',
+        href: '/account/password_reset'
+      }"
+      :is-loading="isLoading"
+      :meta="meta"
+    />
   </Form>
 </template>

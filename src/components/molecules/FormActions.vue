@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 
+import type { PropType } from 'vue'
+import type { LinkProp } from '@/types'
+
 defineProps({
   isLoading: {
     type: Boolean,
@@ -10,18 +13,28 @@ defineProps({
     type: Object,
     required: true,
   },
+  buttonName: {
+    type: String,
+    required: true,
+  },
+  link: {
+    type: Object as PropType<LinkProp>,
+    required: true,
+  },
 })
 
 </script>
 
 <template>
   <div class="flex justify-between items-center">
-    <router-link to="/login" class="text-sm underline">
-      取消
-    </router-link>
-    <button class="btn inline-flex items-center h-40px" type="submit" :disabled="!meta.valid">
-      <mdi:loading v-if="isLoading" class="animate-spin text-lg" />
-      <span v-else>註冊</span>
-    </button>
+    <AppLink :to="link.href" inline>
+      {{ link.content }}
+    </AppLink>
+    <AppButton type="submit" :disabled="!meta.valid">
+      <IconLoading v-if="isLoading" />
+      <span v-else>
+        {{ buttonName }}
+      </span>
+    </AppButton>
   </div>
 </template>

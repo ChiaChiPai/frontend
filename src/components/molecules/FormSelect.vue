@@ -62,8 +62,6 @@ const {
         {{ text }}
       </option>
     </select>
-    <p v-show="errorMessage" class="m-0 text-xs bottom-0.5 left-0 text-red-400 absolute">
-      {{ errorMessage }}
-    </p>
+    <FormErrorMessage :name="name" />
   </div>
 </template>

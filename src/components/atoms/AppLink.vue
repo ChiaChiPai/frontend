@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 import type { PropType } from 'vue'
 
-defineProps({
+const props = defineProps({
   to: {
     type: [String, Object] as PropType<string | object | null>,
     default: null,
@@ -15,7 +15,17 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  inline: {
+    type: Boolean,
+    default: false,
+  },
 })
+
+const linkClass = computed(() => ({
+  'btn': !props.inline,
+  'btn-outline': props.outline,
+  'text-sm underline': props.inline,
+}))
 
 </script>
 
@@ -23,8 +33,7 @@ defineProps({
   <router-link
     v-if="to"
     :to="to"
-    class="btn"
-    :class="{'btn-outline': outline}"
+    :class="linkClass"
   >
     <div v-if="$slots.icon" class="inline-block mr-1">
       <slot name="icon" />
@@ -36,8 +45,7 @@ defineProps({
     :href="href"
     target="_blank"
     rel="noopener"
-    class="btn"
-    :class="{'btn-outline': outline}"
+    :class="linkClass"
   >
     <div v-if="$slots.icon" class="inline-block mr-1">
       <slot name="icon" />

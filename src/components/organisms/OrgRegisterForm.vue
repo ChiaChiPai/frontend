@@ -37,14 +37,14 @@ function onSubmit(values: RegisterOrgArgs) {
 
 <template>
   <Form v-slot="{ meta, values }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
-    <AppInput
+    <FormInput
       name="username"
       label="帳號名稱"
       placeholder="username"
       autocomplete="username"
       required
     />
-    <AppInput
+    <FormInput
       name="email"
       type="email"
       label="電子郵件信箱"
@@ -52,7 +52,7 @@ function onSubmit(values: RegisterOrgArgs) {
       autocomplete="email"
       required
     />
-    <AppInput
+    <FormInput
       name="password"
       type="password"
       label="密碼"
@@ -60,7 +60,7 @@ function onSubmit(values: RegisterOrgArgs) {
       autocomplete="new-password"
       required
     />
-    <AppInput
+    <FormInput
       name="passwordConfirm"
       type="password"
       label="確認密碼"
@@ -68,7 +68,7 @@ function onSubmit(values: RegisterOrgArgs) {
       autocomplete="current-password"
       required
     />
-    <AppInput
+    <FormInput
       name="tel"
       type="tel"
       label="聯絡電話（不含『 - 』）"
@@ -76,54 +76,54 @@ function onSubmit(values: RegisterOrgArgs) {
       autocomplete="tel"
       required
     />
-    <AppSelect
+    <FormSelect
       name="orgType"
       label="單位類型"
       :children="orgTypes"
       required
     />
-    <AppInput
+    <FormInput
       v-if="values.orgType === 'other'"
       name="orgTypeOther"
       label=""
       placeholder="單位類型"
     />
-    <AppInput
+    <FormInput
       name="orgName"
       type="text"
       label="單位正式名稱"
       required
     />
-    <AppSelect
+    <FormSelect
       name="orgCity"
       label="單位縣市"
       :children="TWCountyList"
       required
     />
-    <AppInput
+    <FormInput
       name="orgAddress"
       type="text"
       label="單位地址"
       required
     />
-    <AppInput
+    <FormInput
       name="orgOfficeHours"
       type="text"
       label="聯絡時間 (ex. 10:00~17:00)"
       required
     />
-    <AppSelect
+    <FormSelect
       name="otherContactType"
       label="其他聯絡方式"
       :children="otherContactItems"
     />
-    <AppInput
+    <FormInput
       v-if="values.otherContactType !== ContactMethods.NotSet"
       name="otherContact"
       label=""
       :placeholder="otherContactItems.find(item => item.value === values.otherContactType)?.text || ''"
     />
-    <AppRadio
+    <FormRadio
       name="invoice"
       label="是否需要收據"
       :children="needInvoiceItems"

@@ -70,3 +70,8 @@ export interface SupplyInfo {
   organization: SupplyOrg
   supplies: Supply[]
 }
+
+export interface LinkProp {
+  content: string
+  href: string
+}
