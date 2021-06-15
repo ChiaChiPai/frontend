@@ -14,6 +14,7 @@ declare module 'vue' {
     FormErrorMessage: typeof import('./src/components/atoms/FormErrorMessage.vue')['default']
     IconLoading: typeof import('./src/components/atoms/IconLoading.vue')['default']
     FlashMessage: typeof import('./src/components/global/FlashMessage.vue')['default']
+    AppAddMinusButton: typeof import('./src/components/molecules/AppAddMinusButton.vue')['default']
     AppDatepicker: typeof import('./src/components/molecules/AppDatepicker.vue')['default']
     AppPopover: typeof import('./src/components/molecules/AppPopover.vue')['default']
     FormActions: typeof import('./src/components/molecules/FormActions.vue')['default']
@@ -43,10 +44,6 @@ declare module 'vue' {
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
     JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']
-    'Uil:checkSquare': typeof import('virtual:vite-icons/uil/check-square')['default']
-    'Uil:square': typeof import('virtual:vite-icons/uil/square')['default']
-    'Uil:angleDoubleLeft': typeof import('virtual:vite-icons/uil/angle-double-left')['default']
-    'Uil:angleDoubleRight': typeof import('virtual:vite-icons/uil/angle-double-right')['default']
     'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
   }
 }

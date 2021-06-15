@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmit, defineProps } from 'vue'
+import { defineEmit, defineProps} from 'vue'
 
 defineProps({
   id: String,
@@ -13,6 +13,18 @@ defineProps({
     type: String,
     default: '',
   },
+  count: {
+    type: Number,
+    default: 0,
+  },
+  min: {
+    type: Number,
+    default: null,
+  },
+  max: {
+    type: Number,
+    default: null,
+  },
   error: {
     type: Boolean,
     default: false,
@@ -21,6 +33,10 @@ defineProps({
     type: String,
     default: 'off',
   },
+  addMinusButton: {
+    type: String,
+    default: '',
+  },  
   disabled: {
     type: Boolean,
     default: false,
@@ -31,22 +47,21 @@ defineProps({
   },
 })
 
-defineEmit(['change', 'blur'])
+defineEmit(['change', 'blur', 'click'])
 
 </script>
 
 <template>
   <input
-    :id="name"
-    :name="name"
     :type="type"
-    :value="value"
+    :value="value ? value : count"
     :autocomplete="autocomplete"
     :placeholder="placeholder"
     :disabled="disabled"
     class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
-    :class="{ 'border-red-400': error }"
+    :class="$attrs.class, {'border-red-400': error}"
     @input="$emit('change', $event)"
     @blur="$emit('blur', $event)"
+    @click="$emit('click', $event)"
   >
 </template>
