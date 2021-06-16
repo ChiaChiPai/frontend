@@ -1,5 +1,12 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
+
 <script setup lang="ts">
 import { defineEmit, defineProps } from 'vue'
+import type { PropType } from 'vue'
 
 defineProps({
   id: String,
@@ -10,7 +17,7 @@ defineProps({
     default: 'text',
   },
   value: {
-    type: [Number, String],
+    type: [Number, String] as PropType<number | string>,
     default: '',
   },
   error: {
@@ -36,6 +43,7 @@ defineEmit(['change', 'blur', 'click'])
 </script>
 
 <template>
+  <!-- eslint-disable vue/require-explicit-emits -->
   <input
     :type="type"
     :value="value"
@@ -43,7 +51,10 @@ defineEmit(['change', 'blur', 'click'])
     :placeholder="placeholder"
     :disabled="disabled"
     class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
-    :class="$attrs.class || {'border-red-400': error}"
+    :class="[
+      {'border-red-400': error},
+      $attrs.class
+    ]"
     @input="$emit('change', $event)"
     @blur="$emit('blur', $event)"
     @click="$emit('click', $event)"

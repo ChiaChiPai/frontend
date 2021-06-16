@@ -50,6 +50,7 @@ defineProps({})
       <div class="space-x-2">
         <AppLogo />
         <IconLoading :is-loading="true" />
+        <AppAddMinusButton />
       </div>
     </div>
   </div>
