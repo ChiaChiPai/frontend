@@ -29,13 +29,14 @@ defineEmit(['change', 'input', 'blur'])
         type="checkbox"
         :name="name"
         :disabled="disabled"
+        :checked="checked"
         @change="$emit('change', $event)"
         @blur="$emit('blur', $event)"
         @input="$emit('input', $event)"
       >
       <span class="checkbox__control">
-        <uil:check-circle class="checked" />
-        <uil:circle />
+        <fluent:checkbox-checked-20-filled class="checked" />
+        <fluent:checkbox-unchecked-20-regular />
       </span>
     </span>
     <slot />
@@ -44,7 +45,7 @@ defineEmit(['change', 'input', 'blur'])
 
 <style lang="postcss">
 .checkbox__input {
-  @apply inline-block relative w-21px h-21px mr-1 align-middle;
+  @apply inline-block relative w-32px h-32px mr-1 align-middle;
   > * {
     @apply absolute inset-0 w-full h-full;
   }

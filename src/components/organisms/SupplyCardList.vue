@@ -8,7 +8,7 @@ defineProps({})
 
 <template>
   <div class="space-y-3">
-    <Card
+    <OrgListCard
       v-for="(supplyInfo, idx) in supplyInfos"
       :key="idx + Math.random().toString(36).substring(2, 9)"
       :supply-info="supplyInfo"
