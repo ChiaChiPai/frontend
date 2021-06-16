@@ -10,12 +10,8 @@ defineProps({
     default: 'text',
   },
   value: {
-    type: String,
+    type: [ Number,String ],
     default: '',
-  },
-  count: {
-    type: Number,
-    default: 0,
   },
   min: {
     type: Number,
@@ -32,11 +28,7 @@ defineProps({
   autocomplete: {
     type: String,
     default: 'off',
-  },
-  addMinusButton: {
-    type: String,
-    default: '',
-  },  
+  }, 
   disabled: {
     type: Boolean,
     default: false,
@@ -54,7 +46,7 @@ defineEmit(['change', 'blur', 'click'])
 <template>
   <input
     :type="type"
-    :value="value ? value : count"
+    :value="value"
     :autocomplete="autocomplete"
     :placeholder="placeholder"
     :disabled="disabled"

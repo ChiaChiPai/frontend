@@ -20,16 +20,16 @@ const props = defineProps({
   }
 })
 
-let count =  ref(props.value);
+let value =  ref(props.value);
 
 const handleAdd = () => {
-  if(count.value >= props.max) return
-  count.value++
+  if(value.value >= props.max) return
+  value.value++
 }
 
 const handleMinus = () => {
-  if(count.value <= props.min) return
-  count.value--
+  if(value.value <= props.min) return
+  value.value--
 }
 
 </script>
@@ -43,7 +43,7 @@ const handleMinus = () => {
   />
   <AppInput
     type="number"
-    :count="count"
+    :value="value"
     class="rounded-none h-7 text-center leading-none py-0 px-0 w-7"
   />
   <AppInput
