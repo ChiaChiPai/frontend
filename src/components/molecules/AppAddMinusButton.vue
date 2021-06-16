@@ -17,18 +17,18 @@ const props = defineProps({
   max: {
     type: Number,
     default: null,
-  }
+  },
 })
 
-let value =  ref(props.value);
+const value = ref(props.value)
 
 const handleAdd = () => {
-  if(value.value >= props.max) return
+  if (value.value >= props.max) return
   value.value++
 }
 
 const handleMinus = () => {
-  if(value.value <= props.min) return
+  if (value.value <= props.min) return
   value.value--
 }
 
