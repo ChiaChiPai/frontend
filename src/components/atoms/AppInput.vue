@@ -10,7 +10,7 @@ defineProps({
     default: 'text',
   },
   value: {
-    type: String,
+    type: [Number, String],
     default: '',
   },
   error: {
@@ -31,22 +31,21 @@ defineProps({
   },
 })
 
-defineEmit(['change', 'blur'])
+defineEmit(['change', 'blur', 'click'])
 
 </script>
 
 <template>
   <input
-    :id="name"
-    :name="name"
     :type="type"
     :value="value"
     :autocomplete="autocomplete"
     :placeholder="placeholder"
     :disabled="disabled"
     class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
-    :class="{ 'border-red-400': error }"
+    :class="$attrs.class || {'border-red-400': error}"
     @input="$emit('change', $event)"
     @blur="$emit('blur', $event)"
+    @click="$emit('click', $event)"
   >
 </template>

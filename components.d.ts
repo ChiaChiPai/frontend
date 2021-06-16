@@ -15,6 +15,7 @@ declare module 'vue' {
     FormErrorMessage: typeof import('./src/components/atoms/FormErrorMessage.vue')['default']
     IconLoading: typeof import('./src/components/atoms/IconLoading.vue')['default']
     FlashMessage: typeof import('./src/components/global/FlashMessage.vue')['default']
+    AppAddMinusButton: typeof import('./src/components/molecules/AppAddMinusButton.vue')['default']
     AppCheckbox: typeof import('./src/components/molecules/AppCheckbox.vue')['default']
     AppDatepicker: typeof import('./src/components/molecules/AppDatepicker.vue')['default']
     AppPopover: typeof import('./src/components/molecules/AppPopover.vue')['default']
