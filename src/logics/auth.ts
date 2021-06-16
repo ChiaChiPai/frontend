@@ -55,12 +55,15 @@ export function useAuth() {
 
   // handle SSO logins
   function loginWithLine() {
+    // eslint-disable-next-line no-alert
     alert('Login with Line')
   }
   function loginWithFacebook() {
+    // eslint-disable-next-line no-alert
     alert('Login with Facebook')
   }
   function loginWithGoogle() {
+    // eslint-disable-next-line no-alert
     alert('Login with Google')
   }
 
@@ -73,6 +76,7 @@ export function useAuth() {
   }
 
   function resetPassword(email: string) {
+    // eslint-disable-next-line no-alert
     alert(email)
   }
 

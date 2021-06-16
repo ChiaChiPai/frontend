@@ -13,5 +13,8 @@
         "jsonc/no-useless-escape": "off"
       }
     }
-  ]
+  ],
+  "rules": {
+    "curly": ["error", "multi-line"]
+  }
 }
