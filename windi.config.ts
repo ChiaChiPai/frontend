@@ -33,9 +33,9 @@ export default defineConfig({
       },
     },
     'tag': {
-      '@apply': 'inline-block p-1 bg-secondary text-white text-sm font-bold leading-4 rounded-sm',
+      '@apply': 'inline-block py-1 px-1.5 bg-secondary text-white text-sm leading-4 rounded',
       '&-outline': {
-        '@apply': 'bg-white p-0.75 border border-secondary text-secondary',
+        '@apply': 'bg-white py-0.75 px-1.25 border border-secondary text-secondary',
       },
     },
   },

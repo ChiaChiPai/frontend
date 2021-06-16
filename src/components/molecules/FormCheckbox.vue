@@ -32,10 +32,9 @@ defineProps({
     class="relative w-full pb-6"
     as="div"
   >
-    <label class="ml-2">
-      <input type="checkbox" :name="name" v-bind="field" :value="value" :disabled="disabled">
+    <AppCheckbox v-bind="field" :name="name" :disabled="disabled">
       {{ label }}
-    </label>
+    </AppCheckbox>
     <FormErrorMessage :name="name" />
   </Field>
 </template>

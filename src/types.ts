@@ -2,17 +2,22 @@ import { ContactMethods, OrganizationTypes, Cities } from '@/api'
 
 export type ToSchema<T> = { [P in keyof T]: string }
 
-export type TSupplyInfo = {
+export interface SupplyItem {
+  id: number
+  name: string
+  amount: number
+  unit: string
+  expiredAt: number
+}
+
+export interface TSupplyInfo {
   id: string
   organization: {
     type: string
     name: string
     city: string
   }
-  name: string
-  amount: number
-  unit: string
-  ended_date: string
+  items: SupplyItem[]
 }
 
 export interface InputChildren {
@@ -55,20 +60,6 @@ export interface SupplyOrg {
   type: string
   name: string
   city: string
-}
-
-export interface Supply {
-  name: string
-  amount: number
-  unit: '個'
-  ended_date: string
-  provide: SupplyProvide
-}
-
-export interface SupplyInfo {
-  id: number
-  organization: SupplyOrg
-  supplies: Supply[]
 }
 
 export interface LinkProp {

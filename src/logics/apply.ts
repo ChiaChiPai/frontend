@@ -1,59 +1,52 @@
-import { computed, reactive, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { format, isBefore, isEqual } from 'date-fns'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { supplyInfos } from '@/data'
+import { useStorage } from '@vueuse/core'
 
-import type { SupplyInfo } from '@/types'
+import { SupplyItem } from '@/types'
+
+const allCheckedItems = useStorage<Record<string, number[]>>('checked-apply-items', {})
 
 export function useApply() {
   const route = useRoute()
+  const router = useRouter()
   const id = route.query.id as string
 
-  const isDisabled = ref(true)
-  const supplyInfo = reactive<SupplyInfo>({
-    id: parseInt(id),
-    organization: {
-      type: '醫院',
-      name: '臺大醫院',
-      city: '臺北市',
-    },
-    supplies: Array.from({ length: 3 }).map(() => ({
-      name: 'N95',
-      amount: 200,
-      unit: '個',
-      ended_date: '2021-06-16',
-      provide: {
-        amount: 0,
-        date: format(new Date(), 'yyyy-MM-dd'),
-        applyCheck: false,
-      },
-    })),
+  const supplyInfo = supplyInfos.find(item => item.id === id)!
+
+  if (!supplyInfo) {
+    router.push('/')
+  }
+  const checkedItems = computed(() => {
+    return allCheckedItems.value[supplyInfo.id]
+      ? allCheckedItems.value[supplyInfo.id]
+      : allCheckedItems.value[supplyInfo.id] = []
   })
 
-  const checkedSupply = computed(() => {
-    return supplyInfo.supplies
-      .filter(supply => supply.provide.applyCheck)
-  })
+  const checkedItemLen = computed(() => checkedItems.value.length)
 
-  watch(checkedSupply, (supplies) => {
-    if (supplies.length > 0) {
-      isDisabled.value = false
-      supplies.map(supply => supply.provide.amount
-        && supply.amount >= supply.provide.amount
-        && (isBefore(new Date(supply.provide.date), new Date(supply.ended_date))
-          || isEqual(new Date(supply.provide.date), new Date(supply.ended_date))
-        ))
+  const isDisabled = computed(() => checkedItemLen.value <= 0)
+
+  function changeItem(item: SupplyItem, e: Event) {
+    const checked = (e.target as HTMLInputElement).checked
+    if (checked) {
+      if (!isChecked(item.id)) {
+        allCheckedItems.value[supplyInfo.id].push(item.id)
+      }
     } else {
-      isDisabled.value = true
+      allCheckedItems.value[supplyInfo.id] = allCheckedItems.value[supplyInfo.id].filter(i => i !== item.id)
     }
-  })
+  }
 
-  const checkedItemLen = computed(() =>
-    supplyInfo.supplies.filter(el => el.provide.applyCheck).length,
-  )
+  function isChecked(id: number) {
+    return !!checkedItems.value.find(item => item === id)
+  }
 
   return {
     isDisabled,
     supplyInfo,
     checkedItemLen,
+    changeItem,
+    isChecked,
   }
 }

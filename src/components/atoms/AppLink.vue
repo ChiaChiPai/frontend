@@ -19,12 +19,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  size: String as PropType<'sm'>,
 })
 
 const linkClass = computed(() => ({
   'btn': !props.inline,
   'btn-outline': props.outline,
   'text-sm underline': props.inline,
+  'text-sm px-2.5 py-2': props.size === 'sm',
 }))
 
 </script>
