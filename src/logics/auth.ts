@@ -82,6 +82,7 @@ export function useAuth() {
 
   function registerDonator(data: RegisterDonatorArgs) {
     const {
+      email,
       username,
       password,
       passwordConfirm,
@@ -94,6 +95,7 @@ export function useAuth() {
     const error = ref<any>(null)
 
     registerApi.createDonator({
+      email,
       username,
       password,
       confirmed_password: passwordConfirm,
@@ -147,6 +149,7 @@ export function useAuth() {
     const error = ref<any>(null)
 
     registerApi.createOrganization({
+      email: '',
       username,
       password,
       confirmed_password: passwordConfirm,

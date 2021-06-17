@@ -105,19 +105,19 @@ export interface DonatorCreation {
      * @type {string}
      * @memberof DonatorCreation
      */
-    username: string;
+    username?: string;
     /**
      * 
      * @type {string}
      * @memberof DonatorCreation
      */
-    password: string;
+    password?: string;
     /**
      * 
      * @type {string}
      * @memberof DonatorCreation
      */
-    confirmed_password: string;
+    confirmed_password?: string;
     /**
      * 
      * @type {string}
@@ -136,6 +136,12 @@ export interface DonatorCreation {
      * @memberof DonatorCreation
      */
     other_contact: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonatorCreation
+     */
+    email: string;
 }
 /**
  * 
@@ -155,19 +161,6 @@ export interface GroupedRequiredItems {
      * @memberof GroupedRequiredItems
      */
     items?: Array<RequiredItem>;
-}
-/**
- * 
- * @export
- * @interface JWTRefreshToken
- */
-export interface JWTRefreshToken {
-    /**
-     * 
-     * @type {string}
-     * @memberof JWTRefreshToken
-     */
-    refresh: string;
 }
 /**
  * 
@@ -285,19 +278,19 @@ export interface OrganizationCreation {
      * @type {string}
      * @memberof OrganizationCreation
      */
-    username: string;
+    username?: string;
     /**
      * 
      * @type {string}
      * @memberof OrganizationCreation
      */
-    password: string;
+    password?: string;
     /**
      * 
      * @type {string}
      * @memberof OrganizationCreation
      */
-    confirmed_password: string;
+    confirmed_password?: string;
     /**
      * 
      * @type {string}
@@ -352,6 +345,12 @@ export interface OrganizationCreation {
      * @memberof OrganizationCreation
      */
     other_contact: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationCreation
+     */
+    email: string;
 }
 /**
  * 
@@ -576,13 +575,10 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         /**
          * 
          * @summary Refresh Jwt Token
-         * @param {JWTRefreshToken} jWTRefreshToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refreshJwtToken: async (jWTRefreshToken: JWTRefreshToken, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'jWTRefreshToken' is not null or undefined
-            assertParamExists('refreshJwtToken', 'jWTRefreshToken', jWTRefreshToken)
+        refreshJwtToken: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/auth/token/refresh`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -595,14 +591,13 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication RefreshTokenCookieAuth required
+
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(jWTRefreshToken, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -633,12 +628,11 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Refresh Jwt Token
-         * @param {JWTRefreshToken} jWTRefreshToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async refreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.refreshJwtToken(jWTRefreshToken, options);
+        async refreshJwtToken(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.refreshJwtToken(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -664,12 +658,11 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         /**
          * 
          * @summary Refresh Jwt Token
-         * @param {JWTRefreshToken} jWTRefreshToken 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any): AxiosPromise<JWTToken> {
-            return localVarFp.refreshJwtToken(jWTRefreshToken, options).then((request) => request(axios, basePath));
+        refreshJwtToken(options?: any): AxiosPromise<JWTToken> {
+            return localVarFp.refreshJwtToken(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -696,13 +689,120 @@ export class AuthenticationApi extends BaseAPI {
     /**
      * 
      * @summary Refresh Jwt Token
-     * @param {JWTRefreshToken} jWTRefreshToken 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public refreshJwtToken(jWTRefreshToken: JWTRefreshToken, options?: any) {
-        return AuthenticationApiFp(this.configuration).refreshJwtToken(jWTRefreshToken, options).then((request) => request(this.axios, this.basePath));
+    public refreshJwtToken(options?: any) {
+        return AuthenticationApiFp(this.configuration).refreshJwtToken(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * OAuthApi - axios parameter creator
+ * @export
+ */
+export const OAuthApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Oauth Line Login
+         * @param {string} next 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oauthLineLogin: async (next: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'next' is not null or undefined
+            assertParamExists('oauthLineLogin', 'next', next)
+            const localVarPath = `/oauth/line/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (next !== undefined) {
+                localVarQueryParameter['next'] = next;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * OAuthApi - functional programming interface
+ * @export
+ */
+export const OAuthApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OAuthApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Oauth Line Login
+         * @param {string} next 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async oauthLineLogin(next: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWTToken>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.oauthLineLogin(next, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * OAuthApi - factory interface
+ * @export
+ */
+export const OAuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OAuthApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Oauth Line Login
+         * @param {string} next 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        oauthLineLogin(next: string, options?: any): AxiosPromise<JWTToken> {
+            return localVarFp.oauthLineLogin(next, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * OAuthApi - object-oriented interface
+ * @export
+ * @class OAuthApi
+ * @extends {BaseAPI}
+ */
+export class OAuthApi extends BaseAPI {
+    /**
+     * 
+     * @summary Oauth Line Login
+     * @param {string} next 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OAuthApi
+     */
+    public oauthLineLogin(next: string, options?: any) {
+        return OAuthApiFp(this.configuration).oauthLineLogin(next, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -735,7 +835,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication JWTAuthBearer required
+            // authentication JWTAuthUserBearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
@@ -773,7 +873,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication JWTAuthBearer required
+            // authentication JWTAuthUserBearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
@@ -1024,6 +1124,10 @@ export const RegisterApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication JWTAuthBearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1059,6 +1163,10 @@ export const RegisterApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication JWTAuthBearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
