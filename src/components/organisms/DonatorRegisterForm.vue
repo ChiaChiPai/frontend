@@ -31,12 +31,6 @@ function onSubmit(values: RegisterDonatorArgs) {
 
 <template>
   <Form v-slot="{ meta, values }" :validation-schema="schema" :initial-values="initialValues" @submit="onSubmit">
-    <AppImage
-      width="50"
-      url="/img/logo"
-      imgtype="png"
-      alt="logo"
-    />
     <FormInput
       name="username"
       label="帳號名稱"
