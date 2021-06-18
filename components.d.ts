@@ -48,14 +48,19 @@ declare module 'vue' {
     RegisterOrg: typeof import('./src/components/templates/RegisterOrg.vue')['default']
     ResetPassword: typeof import('./src/components/templates/ResetPassword.vue')['default']
     TheHeader: typeof import('./src/components/templates/TheHeader.vue')['default']
-    JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
-    'Uil:checkSquare': typeof import('virtual:vite-icons/uil/check-square')['default']
-    'Uil:square': typeof import('virtual:vite-icons/uil/square')['default']
+    JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']
+    'Uil:angleDown': typeof import('virtual:vite-icons/uil/angle-down')['default']
+    'Uil:angleUp': typeof import('virtual:vite-icons/uil/angle-up')['default']
+    'Uil:angleLeft': typeof import('virtual:vite-icons/uil/angle-left')['default']
+    'Fluent:checkboxChecked20Filled': typeof import('virtual:vite-icons/fluent/checkbox-checked20-filled')['default']
+    'Fluent:checkboxUnchecked20Regular': typeof import('virtual:vite-icons/fluent/checkbox-unchecked20-regular')['default']
+    'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
     'Uil:angleDoubleLeft': typeof import('virtual:vite-icons/uil/angle-double-left')['default']
     'Uil:angleDoubleRight': typeof import('virtual:vite-icons/uil/angle-double-right')['default']
-    'Mdi:loading': typeof import('virtual:vite-icons/mdi/loading')['default']
+    'Uil:checkSquare': typeof import('virtual:vite-icons/uil/check-square')['default']
+    'Uil:square': typeof import('virtual:vite-icons/uil/square')['default']
   }
 }
 
