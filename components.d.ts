@@ -48,6 +48,7 @@ declare module 'vue' {
     RegisterOrg: typeof import('./src/components/templates/RegisterOrg.vue')['default']
     ResetPassword: typeof import('./src/components/templates/ResetPassword.vue')['default']
     TheHeader: typeof import('./src/components/templates/TheHeader.vue')['default']
+    ConfirmModel: typeof import('./src/components/organisms/ConfirmModel.vue')['default']
     'Ic:roundMenu': typeof import('virtual:vite-icons/ic/round-menu')['default']
     'Ic:roundAccountCircle': typeof import('virtual:vite-icons/ic/round-account-circle')['default']
     JamCloseCircleF: typeof import('virtual:vite-icons/jam/close-circle-f')['default']

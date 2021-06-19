@@ -55,12 +55,15 @@ export function useAuth() {
 
   // handle SSO logins
   function loginWithLine() {
+    // eslint-disable-next-line no-alert
     alert('Login with Line')
   }
   function loginWithFacebook() {
+    // eslint-disable-next-line no-alert
     alert('Login with Facebook')
   }
   function loginWithGoogle() {
+    // eslint-disable-next-line no-alert
     alert('Login with Google')
   }
 
@@ -73,11 +76,13 @@ export function useAuth() {
   }
 
   function resetPassword(email: string) {
+    // eslint-disable-next-line no-alert
     alert(email)
   }
 
   function registerDonator(data: RegisterDonatorArgs) {
     const {
+      email,
       username,
       password,
       passwordConfirm,
@@ -90,6 +95,7 @@ export function useAuth() {
     const error = ref<any>(null)
 
     registerApi.createDonator({
+      email,
       username,
       password,
       confirmed_password: passwordConfirm,
@@ -143,6 +149,7 @@ export function useAuth() {
     const error = ref<any>(null)
 
     registerApi.createOrganization({
+      email: '',
       username,
       password,
       confirmed_password: passwordConfirm,

@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { computed, defineProps, ref, defineEmit } from 'vue'
-import {
-  startOfMonth, lastDayOfMonth, addMonths, getDay,
-  addDays, isToday, isSameMonth, isSameDay, eachDayOfInterval,
-  format, getMonth, setMonth,
-} from 'date-fns'
-import { useEventListener } from '@vueuse/core'
+import dayjs, { Dayjs } from 'dayjs'
 
 type TDay = {
-  date: Date
+  date: Dayjs
   isCurrentMonth: boolean
   isToday: boolean
   isSelected: boolean
@@ -19,15 +14,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  format: {
+    type: String,
+    default: 'YYYY-MM-DD',
+  },
 })
 
 const emit = defineEmit(['update:modelValue'])
-
-const calendar = ref<HTMLDivElement>()
-const isShow = ref(false)
-
-const showCalendar = () => { isShow.value = true }
-const hideCalendar = () => { isShow.value = false }
 
 const DAY_LABELS_TW = [
   '日',
@@ -70,31 +63,35 @@ const MONTH_LABELS = [
 ];
 */
 
-const currDateCursor = ref(new Date(props.modelValue))
-const selectedDate = ref(new Date(props.modelValue))
+const currDateCursor = ref(dayjs(props.modelValue))
+const selectedDate = ref(dayjs(props.modelValue))
 
-const formatedDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'))
+const formatedDate = computed(() => selectedDate.value.format(props.format))
 
-const curYear = computed(() => currDateCursor.value.getFullYear())
-const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.getMonth()])
+const curYear = computed(() => currDateCursor.value.year())
+const curMonth = computed(() => MONTH_LABELS_TW[currDateCursor.value.month()])
 const dates = computed(() => {
   const cursorDate = currDateCursor
-  let startDate = startOfMonth(cursorDate.value)
-  let endDate = lastDayOfMonth(cursorDate.value)
-  const daysNeededForLastMonth = getDay(startDate)
-  const daysNeededForNextMonth = 6 - getDay(endDate)
-  startDate = addDays(startDate, -daysNeededForLastMonth)
-  endDate = addDays(endDate, daysNeededForNextMonth)
+  const startOfMonth = cursorDate.value.startOf('M')
+  const endOfMonth = cursorDate.value.endOf('M')
+  const daysNeededForLastMonth = startOfMonth.day()
+  const daysNeededForNextMonth = 6 - endOfMonth.day()
+  const startDate = startOfMonth.add(-daysNeededForLastMonth, 'd')
+  const endDate = endOfMonth.add(daysNeededForNextMonth, 'd')
 
-  return eachDayOfInterval({ start: startDate, end: endDate }).map((date: Date) => ({
-    date,
-    isCurrentMonth: isSameMonth(cursorDate.value, date),
-    isToday: isToday(date),
-    isSelected: isSameDay(selectedDate.value, date),
-  }))
+  return Array.from({ length: endDate.diff(startDate, 'd') + 1 }).map((_, i) => {
+    const date = startDate.add(i, 'd')
+
+    return {
+      date,
+      isCurrentMonth: date.isSame(cursorDate.value, 'M'),
+      isToday: date.isSame(dayjs(props.modelValue)),
+      isSelected: date.isSame(selectedDate.value),
+    }
+  })
 })
 
-const formatDateToDay = (val: Date) => format(val, 'd')
+const formatDateToDay = (val: Dayjs) => val.date()
 
 const dayClassObj = (day: TDay) => ({
   today: day.isToday,
@@ -103,98 +100,92 @@ const dayClassObj = (day: TDay) => ({
 })
 
 const nextMonth = () => {
-  currDateCursor.value = addMonths(currDateCursor.value, 1)
+  currDateCursor.value = currDateCursor.value.add(1, 'M')
 }
 
 const prevMonth = () => {
-  currDateCursor.value = addMonths(currDateCursor.value, -1)
+  currDateCursor.value = currDateCursor.value.add(-1, 'M')
 }
 
 const setSelectedDate = (day: TDay) => {
   selectedDate.value = day.date
-  emit('update:modelValue', format(selectedDate.value, 'yyyy-MM-dd'))
+  emit('update:modelValue', selectedDate.value.format('YYYY-MM-DD'))
   // change calendar to correct month if they select previous or next month's days
   if (!day.isCurrentMonth) {
-    const selectedMonth = getMonth(selectedDate.value)
-    currDateCursor.value = setMonth(currDateCursor.value, selectedMonth)
-  }
-  hideCalendar()
-}
-
-const handleOutsideClick = (e: Event) => {
-  e.stopPropagation()
-
-  if (!calendar.value?.contains(e.target as Node)) {
-    hideCalendar()
+    const selectedMonth = selectedDate.value.month()
+    currDateCursor.value = currDateCursor.value.month(selectedMonth)
   }
 }
-
-useEventListener(document, 'click', handleOutsideClick)
-useEventListener(document, 'touchstart', handleOutsideClick)
 </script>
 <template>
-  <div
-    ref="calendar"
-    class="relative"
-  >
+  <AppPopover>
     <input
       :value="formatedDate"
       class="border border-tansparent rounded-md outline-none w-full py-2 px-3 focus:border-gray-400"
       readonly
-      @focus="showCalendar"
     >
-    <div
-      v-if="isShow"
-      class="calendar-container"
-    >
-      <header class="flex items-center justify-around col-span-7">
-        <button
-          class="icon-btn text-sm"
-          @click="prevMonth"
-        >
-          <uil:angle-double-left />
-        </button>
-        <span class="p-2">
-          {{ curMonth }} {{ curYear }}
-        </span>
-        <button
-          class="icon-btn text-sm"
-          @click="nextMonth"
-        >
-          <uil:angle-double-right />
-        </button>
-      </header>
+    <template #content>
       <div
-        v-for="dayLabel in DAY_LABELS_TW"
-        :key="dayLabel"
-        class="flex items-center justify-center"
+        class="calendar-container"
       >
-        {{ dayLabel }}
-      </div>
-      <div
-        v-for="(day, index) in dates"
-        :key="index"
-        class="rounded"
-        :class="dayClassObj(day)"
-      >
-        <button
-          class="date-btn"
+        <header class="flex items-center justify-around col-span-7">
+          <button
+            class="icon-btn text-sm"
+            @click.stop="prevMonth"
+          >
+            <uil:angle-double-left />
+          </button>
+          <span class="p-2">
+            {{ curMonth }} {{ curYear }}
+          </span>
+          <button
+            class="icon-btn text-sm"
+            @click.stop="nextMonth"
+          >
+            <uil:angle-double-right />
+          </button>
+        </header>
+        <div
+          v-for="dayLabel in DAY_LABELS_TW"
+          :key="dayLabel"
+          class="flex items-center justify-center"
+        >
+          {{ dayLabel }}
+        </div>
+        <div
+          v-for="(day, index) in dates"
+          :key="index"
+          class="rounded"
           :class="dayClassObj(day)"
-          @click="setSelectedDate(day)"
         >
-          {{ formatDateToDay(day.date) }}
-        </button>
+          <button
+            class="date-btn"
+            :class="dayClassObj(day)"
+            @click="setSelectedDate(day)"
+          >
+            {{ formatDateToDay(day.date) }}
+          </button>
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </AppPopover>
 </template>
 <style scoped lang="postcss">
 .calendar-container {
-  @apply bg-white border-0 pt-1 px-2 py-3 rounded-md shadow-md grid grid-cols-7 absolute -left-15 mt-1 z-2;
+  @apply
+    grid grid-cols-7
+    bg-white border-0
+    pt-1 px-2 py-3 mt-1 z-2
+    rounded-md shadow-md;
+    /* absolute left-0; */
 }
 .date-btn {
-  @apply outline-none text-gray-400 w-full rounded py-1 px-2
-    flex justify-center focus:bg-primary focus:text-white;
+  @apply
+    outline-none w-full rounded-md
+    py-1 px-2
+    flex justify-center
+    focus:bg-primary
+    text-gray-400 focus:text-white;
 }
 
 .current {

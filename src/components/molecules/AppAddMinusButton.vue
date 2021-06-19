@@ -35,6 +35,7 @@ const handleMinus = () => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <AppInput
     type="button"
     value="-"
@@ -52,4 +53,25 @@ const handleMinus = () => {
     class="rounded-l-none h-7 leading-none py-0 px-0 w-6"
     @click="handleAdd"
   />
+=======
+  <div class="inline-flex">
+    <AppInput
+      type="button"
+      value="-"
+      class="rounded-r-none rounded-5 h-7 leading-none py-0 px-0 w-6"
+      @click="handleMinus"
+    />
+    <AppInput
+      type="number"
+      :value="value"
+      class="rounded-none h-7 text-center leading-none py-0 px-0 w-7"
+    />
+    <AppInput
+      type="button"
+      value="+"
+      class="rounded-l-none h-7 leading-none py-0 px-0 w-6"
+      @click="handleAdd"
+    />
+  </div>
+>>>>>>> tw-main
 </template>
