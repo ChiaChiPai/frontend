@@ -23,7 +23,7 @@ const props = defineProps({
   </div>
 </template>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 .scheduleDot::after {
   @apply content w-3 h-3 bg-green-500 absolute -left-5 rounded-full top-5/9 transform -translate-y-1/2;
 }
