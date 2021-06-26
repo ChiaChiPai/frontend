@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite-plugin-windicss'
+import colors from 'windicss/colors'
 
 export default defineConfig({
   theme: {
     extend: {
       colors: {
-        primary: '#28B78D',
+        primary: colors.cyan[400],
         secondary: '#17A2B8',
         line: '#00B900',
         facebook: '#1778F2',
@@ -34,9 +35,9 @@ export default defineConfig({
       },
     },
     'tag': {
-      '@apply': 'inline-block py-1 px-1.5 bg-secondary text-white text-sm leading-4 rounded',
+      '@apply': 'inline-block py-1 px-1.5 bg-primary text-white text-sm leading-4 rounded',
       '&-outline': {
-        '@apply': 'bg-white py-0.75 px-1.25 border border-secondary text-secondary',
+        '@apply': 'bg-white py-0.75 px-1.25 border border-primary text-primary',
       },
     },
   },
