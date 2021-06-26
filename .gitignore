@@ -3,3 +3,6 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# vite-plugin-components
+components.d.ts
