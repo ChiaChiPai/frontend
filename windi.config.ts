@@ -1,11 +1,14 @@
 import { defineConfig } from 'vite-plugin-windicss'
-import colors from 'windicss/colors'
 
 export default defineConfig({
   theme: {
     extend: {
       colors: {
-        primary: colors.cyan[400],
+        primary: {
+          DEFAULT: '#14B8A6',
+          light: '#C6F2EA',
+          dark: '#159385',
+        },
         secondary: '#17A2B8',
         line: '#00B900',
         facebook: '#1778F2',
